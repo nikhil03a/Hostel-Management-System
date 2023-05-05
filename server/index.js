@@ -56,6 +56,26 @@ app.post('/student/login', async (req, res) => {
         }
     });
 })
+app.get('/admin/approval',async (req,res)=>{
+    db.query("select * from wardendetails where approved=0", (err, data) => {
+        if (data.length > 0) {
+            res.json(data);
+        } else {
+            res.json({message:"Nothing"})
+        }
+    });
+})
+app.post('/admin/approval',async(req,res)=>{
+    const user = {
+        id:req.body.id,
+        uname: req.body.uname,
+        pwd: req.body.pwd
+    }
+    db.query("update wardendetails set approved=1 where id=?",[user.id], (err, data) => {
+        db.query("insert into wardenauth (username,password) values (?,?)",[user.uname,user.pwd], (err, data) => {});
+    });
+    
+})
 app.get("/student", (req, res) => {
     const q = "select * from student";
     db.query(q, (err, data) => {

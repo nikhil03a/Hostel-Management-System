@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import AdminSideBar from '../components/AdminSideBar'
 const AdminPage = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,8 +23,10 @@ const AdminPage = () => {
   }
   return (
     <div>
-      {isLoggedIn && <><h1>Admin Page</h1>
-        <button onClick={logout}>Logout</button></>}
+      {isLoggedIn && <>
+        <div className='font-mono font-bold text-3xl'>Admin Page</div>
+        <AdminSideBar />
+        <button onClick={logout} className='bg-gray-200 p-3 '>Logout</button></>}
     </div>
   )
 }

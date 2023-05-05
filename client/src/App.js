@@ -7,6 +7,7 @@ import WardenLoginPage from './pages/WardenLoginPage';
 import WardenPage from './pages/WardenPage';
 import StudentLoginPage from './pages/StudentLoginPage';
 import StudentPage from './pages/StudentPage';
+import AdminApproval from './components/AdminApproval'
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +19,7 @@ function App() {
         <Route exact path='/warden' element={<WardenPage />}></Route>
         <Route exact path='/student-login' element={<StudentLoginPage />}></Route>
         <Route exact path='/student' element={<StudentPage />}></Route>
+        <Route exact path='/admin/approval' element={<AdminApproval />}></Route>
       </Routes>
     </BrowserRouter>
 
