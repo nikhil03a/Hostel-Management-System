@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import AdminSideBar from '../components/AdminSideBar'
+import SideBar from '../components/SideBar'
+import Navbar from '../components/Navbar'
 const AdminPage = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -17,16 +18,16 @@ const AdminPage = () => {
     checkUserToken();
   }, [isLoggedIn])
 
-  const logout = () => {
-    localStorage.clear();
-    navigate('/');
-  }
+
   return (
     <div>
-      {isLoggedIn && <>
-        <div className='font-mono font-bold text-3xl'>Admin Page</div>
-        <AdminSideBar />
-        <button onClick={logout} className='bg-gray-200 p-3 '>Logout</button></>}
+      <Navbar />
+      <div>
+        <SideBar links={[
+          { label: "Authenticate Warden", path: "/admin/approval" },
+          { label: "View Warden Details", path: "/admin/view-warden" }
+        ]}/>
+      </div>
     </div>
   )
 }

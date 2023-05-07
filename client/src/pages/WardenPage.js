@@ -1,5 +1,7 @@
+import Navbar from '../components/Navbar';
 import React,{useState,useEffect} from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
+import SideBar from '../components/SideBar';
 const WardenPage = () => {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,16 +18,17 @@ const WardenPage = () => {
     useEffect(() => {
       checkUserToken();
     }, [isLoggedIn])
-    
-    const logout = () => {
-      localStorage.clear();
-      navigate('/');
-    }
     return (
-      <div>
-        { isLoggedIn && <><h1>Warden Page</h1>
-        <button onClick={logout}>Logout</button></>}
+      <div className='relative'>
+      <Navbar />
+      <div className='flex space-x-10'>
+        <div><SideBar links={[
+          { label: "Authenticate Student", path: "/warden/approval" },
+          { label: "View Student Details", path: "/warden/view-student" },
+          { label: "Enable Room Allocation", path: "/warden/enable-room" }]  }/></div>
+        
       </div>
+    </div>
     )
 }
 

@@ -50,7 +50,7 @@ app.post('/student/login', async (req, res) => {
     };
     db.query("select id from studentauth where username=? and password=? limit 1", [user.username, user.password], (err, data) => {
         if (data.length > 0) {
-            res.json({ result: 'SUCCESS', token:'studentstudent' });
+            res.json({ result: 'SUCCESS', token:'studentstudent', id: data[0].id});
         } else {
             res.json({ result: 'ERROR', message: "User id or password is not correct!" });
         }
@@ -75,6 +75,23 @@ app.post('/admin/approval',async(req,res)=>{
         db.query("insert into wardenauth (username,password) values (?,?)",[user.uname,user.pwd], (err, data) => {});
     });
     
+})
+app.post('/student/room/:id',async(req,res)=>{
+    const hostel = req.body.hostel;
+    const room = req.body.room;
+    const id = req.params.id;
+    db.query("select id,vacancy from hostelvacancy where hostel=? and room=?",[hostel,room],(err,data)=>{
+        const roomid = data[0].id;
+        if(data[0].vacancy > 0 ){
+            db.query("update hostelvacancy set vacancy=vacancy-1 where hostel=? and room=?",[hostel,room],(err,data)=>{
+                db.query("insert into hostelstudent (roomid,studentid) values (?,?)",[roomid,id],(err,data)=>{
+                    res.json({message:"SUCCESS"})
+                })
+            })
+        }else{
+            res.json({message:"NA"});
+        }
+    })
 })
 app.get("/student", (req, res) => {
     const q = "select * from student";

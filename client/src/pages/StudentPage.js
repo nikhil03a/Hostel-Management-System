@@ -1,5 +1,7 @@
+import Navbar from '../components/Navbar';
 import React,{useEffect,useState} from 'react'
 import { useNavigate } from 'react-router-dom';
+import SideBar from '../components/SideBar';
 const StudentPage = () => {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,10 +24,14 @@ const StudentPage = () => {
       navigate('/');
     }
     return (
-      <div>
-        { isLoggedIn && <><h1>Student Page</h1>
-        <button onClick={logout}>Logout</button></>}
+      <div className='relative'>
+      <Navbar />
+      <div className='flex space-x-10'>
+        <div><SideBar links={[
+          { label: "Dashboard", path: "/student/dashboard/"+localStorage.getItem("id") },
+          { label: "Room Allocation", path: "/student/room/"+localStorage.getItem("id") }]  }/></div>
       </div>
+    </div>
     )
 }
 
