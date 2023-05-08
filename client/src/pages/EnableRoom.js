@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 const EnableRoom = () => {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isEnable,setIsEnabled] = useState(false);
     const checkUserToken = () => {
         const userToken = localStorage.getItem('user-token');
         if (userToken === 'wardenwarden') {
@@ -18,16 +19,49 @@ const EnableRoom = () => {
         checkUserToken();
     }, [isLoggedIn])
     
-    const [room,setRoom] = useState('disable')
-    const content = room==="enable" ? "Process is currently enabled. Click to disable" : "Process is currently disabled. Click to enable";
-    useEffect(()=>{
-        localStorage.setItem('room',room)
-    },[room])
-    const handleClick = ()=>{
-        if(room === 'enable')
-           setRoom('disable')
-        else    
-            setRoom('enable');
+    const checkIfEnabled = async () => {
+        await fetch("http://localhost:8800/warden/room-enable", {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then((response) => {
+            return response.json()
+        }).then(data => {
+            const message = data.message
+            if (message == "enabled") {
+                setIsEnabled(true);
+            }
+        })
+        .catch(error => {
+            window.alert(error);
+            return;
+        })
+    }
+    useEffect(() => {
+        checkIfEnabled();
+    }, [isEnable])
+    const handleClick = async () => {
+        await fetch("http://localhost:8800/warden/room-enable", {
+            method: 'POST',
+            body:JSON.stringify({
+                value: isEnable ? 0 : 1
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then((response) => {
+            return response.json()
+        }).then(data => {
+            const message = data.message
+            if (message === 'SUCCESS') {
+                setIsEnabled(!isEnable);
+            }else{
+                setIsEnabled(!isEnable);
+            }}).catch(error => {
+            window.alert(error);
+            return;
+        })
     }
     return (
         <div>
@@ -40,10 +74,11 @@ const EnableRoom = () => {
                         { label: "Enable Room Allocation", path: "/warden/enable-room" }
                     ]} />
                 </div>
-                <div>
-                    {content}
+                <div className='mt-5'>
+                    {isEnable ? <div> Room allocation process is currently enabled. Click below to disable</div> :
+                     <div>Room allocation process is currently disabled. Click below to enable</div>}
                     <br></br>
-                    <button onClick={handleClick}>Enable / Disable</button>
+                    <button onClick={handleClick} className='cursor-pointer border p-2 bg-slate-100 rounded border-dashed hover:bg-slate-200'>Enable / Disable</button>
                 </div>
             </div>
         </div>

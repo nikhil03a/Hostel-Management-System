@@ -76,6 +76,31 @@ app.post('/admin/approval',async(req,res)=>{
     });
     
 })
+app.get('/warden/room-enable',async(req,res)=>{
+    db.query("select value from roomenable where id=1",(err,data)=>{
+        if(data[0].value == 1){
+            res.json({message: "enabled"})
+        }else{
+            res.json({message:"disabled"})
+        }
+    })
+})
+app.post('/warden/room-enable',async(req,res)=>{
+    db.query("update roomenable set value=? where id=1",[req.body.value],(err,data)=>{
+        res.json("SUCCESS");
+    })
+})
+app.get('/student/room/:id',async(req,res)=>{
+    db.query("select roomid from hostelstudent where studentid=?",[req.params.id],(err,data)=>{
+        if(data.length > 0){
+            db.query("select * from hostelvacancy where id=?",[data[0].roomid],(err,data)=>{
+                res.json(data[0]);
+            })
+        }else{
+            res.json({message: "NA"})
+        }
+    })
+})
 app.post('/student/room/:id',async(req,res)=>{
     const hostel = req.body.hostel;
     const room = req.body.room;
