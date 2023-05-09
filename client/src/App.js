@@ -25,7 +25,7 @@ function App() {
         <Route exact path='/student-register' element={<StudentRegForm />}></Route>
         <Route path='/student/:id' element={<StudentPage />}></Route>
         <Route exact path='/admin/approval' element={<AdminApproval />}></Route>
-        <Route exact path='/warden/enable-room' element={<EnableRoom />}></Route>
+        <Route exact path='/admin/enable-room' element={<EnableRoom />}></Route>
         <Route exact path='/admin/view-warden' element={<ViewWarden />}></Route>
         <Route path='/student/room/:id' element={<StudentRoom />}></Route>
       </Routes>

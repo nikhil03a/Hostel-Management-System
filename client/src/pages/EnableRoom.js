@@ -8,7 +8,7 @@ const EnableRoom = () => {
     const [isEnable,setIsEnabled] = useState(false);
     const checkUserToken = () => {
         const userToken = localStorage.getItem('user-token');
-        if (userToken === 'wardenwarden') {
+        if (userToken === 'adminadmin') {
             setIsLoggedIn(true);
         } else {
             setIsLoggedIn(false);
@@ -20,7 +20,7 @@ const EnableRoom = () => {
     }, [isLoggedIn])
     
     const checkIfEnabled = async () => {
-        await fetch("http://localhost:8800/warden/room-enable", {
+        await fetch("http://localhost:8800/admin/room-enable", {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json"
@@ -42,7 +42,7 @@ const EnableRoom = () => {
         checkIfEnabled();
     }, [isEnable])
     const handleClick = async () => {
-        await fetch("http://localhost:8800/warden/room-enable", {
+        await fetch("http://localhost:8800/admin/room-enable", {
             method: 'POST',
             body:JSON.stringify({
                 value: isEnable ? 0 : 1
@@ -71,7 +71,7 @@ const EnableRoom = () => {
                     <SideBar links={[
                         { label: "Authenticate Student", path: "/admin/approval" },
                         { label: "View Student Details", path: "/admin/view-warden" },
-                        { label: "Enable Room Allocation", path: "/warden/enable-room" }
+                        { label: "Enable Room Allocation", path: "/admin/enable-room" }
                     ]} />
                 </div>
                 <div className='mt-5'>

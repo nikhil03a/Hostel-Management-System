@@ -24,8 +24,7 @@ const WardenPage = () => {
       <div className='flex space-x-10'>
         <div><SideBar links={[
           { label: "Authenticate Student", path: "/warden/approval" },
-          { label: "View Student Details", path: "/warden/view-student" },
-          { label: "Enable Room Allocation", path: "/warden/enable-room" }]  }/></div>
+          { label: "View Student Details", path: "/warden/view-student" }]  }/></div>
         
       </div>
     </div>

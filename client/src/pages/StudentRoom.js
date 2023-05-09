@@ -13,7 +13,7 @@ const StudentRoom = () => {
     })
     const [error, setError] = useState('');
     const checkIfEnabled = async () => {
-        await fetch("http://localhost:8800/warden/room-enable", {
+        await fetch("http://localhost:8800/admin/room-enable", {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json"
