@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const WardenLoginPage = () => {
     const navigate = useNavigate();
     const [uname, setUname] = useState('');
@@ -72,6 +72,7 @@ const WardenLoginPage = () => {
             <div className='text-red-500 font-serif'>
                 {error}
               </div>}
+              <div>Not registered yet.. <Link to='/warden-register'>click here</Link> to register</div>
             <div className='mt-6'>
               <input type="submit" value="Submit" onClick={handleSubmit} className='w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600'></input>
             </div>

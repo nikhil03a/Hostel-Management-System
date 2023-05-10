@@ -57,7 +57,7 @@ app.post('/student/login', async (req, res) => {
     });
 })
 app.get('/admin/approval',async (req,res)=>{
-    db.query("select * from wardendetails where approved=0", (err, data) => {
+    db.query("select * from warden where approved=0", (err, data) => {
         if (data.length > 0) {
             res.json(data);
         } else {
@@ -71,8 +71,28 @@ app.post('/admin/approval',async(req,res)=>{
         uname: req.body.uname,
         pwd: req.body.pwd
     }
-    db.query("update wardendetails set approved=1 where id=?",[user.id], (err, data) => {
+    db.query("update warden set approved=1 where id=?",[user.id], (err, data) => {
         db.query("insert into wardenauth (username,password) values (?,?)",[user.uname,user.pwd], (err, data) => {});
+    });
+    
+})
+app.get('/warden/approval',async (req,res)=>{
+    db.query("select * from student where approved=0", (err, data) => {
+        if (data.length > 0) {
+            res.json(data);
+        } else {
+            res.json({message:"Nothing"})
+        }
+    });
+})
+app.post('/warden/approval',async(req,res)=>{
+    const user = {
+        id:req.body.id,
+        uname: req.body.uname,
+        pwd: req.body.pwd
+    }
+    db.query("update student set approved=1 where id=?",[user.id], (err, data) => {
+        db.query("insert into studentauth (username,password) values (?,?)",[user.uname,user.pwd], (err, data) => {});
     });
     
 })

@@ -6,12 +6,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import WardenLoginPage from './pages/WardenLoginPage';
 import WardenPage from './pages/WardenPage';
 import StudentLoginPage from './pages/StudentLoginPage';
-import StudentRegForm from './components/StudentRegForm'
+import StudentRegForm from './pages/StudentRegForm'
 import StudentPage from './pages/StudentPage';
 import AdminApproval from './pages/AdminApproval'
 import EnableRoom from './pages/EnableRoom';
 import ViewWarden from './pages/ViewWarden';
 import StudentRoom from './pages/StudentRoom';
+import WardenRegForm from './pages/WardenRegForm';
+import WardenApproval from './pages/WardenApproval';
 function App() {
   return (
     <BrowserRouter>
@@ -28,6 +30,9 @@ function App() {
         <Route exact path='/admin/enable-room' element={<EnableRoom />}></Route>
         <Route exact path='/admin/view-warden' element={<ViewWarden />}></Route>
         <Route path='/student/room/:id' element={<StudentRoom />}></Route>
+        <Route exact path='/student-register' element={<StudentRegForm />}></Route>
+        <Route exact path='/warden-register' element={<WardenRegForm />}></Route>
+        <Route exact path='/warden/approval' element={<WardenApproval />}></Route>
       </Routes>
     </BrowserRouter>
 
