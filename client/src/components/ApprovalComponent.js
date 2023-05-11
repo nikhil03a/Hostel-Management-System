@@ -26,7 +26,7 @@ const ApprovalComponent = ({ detail }) => {
     }
     const approveStudent = async () => {
         setIsApproved(true);
-        await fetch("http://localhost:8800/warden/approval", {
+        await fetch("http://localhost:8800/warden/approval/"+localStorage.getItem('id'), {
             method: 'POST',
             body: JSON.stringify({
                 id: detail.id,

@@ -23,9 +23,9 @@ const WardenPage = () => {
       <Navbar />
       <div className='flex space-x-10'>
         <div><SideBar links={[
-          {label:"Dashboard", path:'/warden'},
-          { label: "Authenticate Student", path: "/warden/approval" },
-          { label: "View Student Details", path: "/warden/view-student" }]  }/></div>
+          {label:"Dashboard", path:'/warden/'+localStorage.getItem('id')},
+          { label: "Authenticate Student", path: "/warden/approval/"+localStorage.getItem('id') },
+          { label: "View Student Details", path: "/warden/view-student/"+localStorage.getItem('id') }]  }/></div>
         
       </div>
     </div>

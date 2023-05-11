@@ -69,8 +69,8 @@ const EnableRoom = () => {
             <div className='flex space-x-8'>
                 <div>
                     <SideBar links={[
-                        { label: "Authenticate Student", path: "/admin/approval" },
-                        { label: "View Student Details", path: "/admin/view-warden" },
+                        { label: "Authenticate Warden", path: "/admin/approval" },
+                        { label: "View Warden Details", path: "/admin/view-warden" },
                         { label: "Enable Room Allocation", path: "/admin/enable-room" }
                     ]} />
                 </div>

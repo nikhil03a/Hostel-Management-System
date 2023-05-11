@@ -23,7 +23,7 @@ const AdminPage = () => {
     <div>
       <Navbar />
       <div>
-        <SideBar links={[
+        <SideBar user="Admin" links={[
           { label: "Authenticate Warden", path: "/admin/approval" },
           { label: "View Warden Details", path: "/admin/view-warden" },
           { label: "Enable Room Allocation", path: "/admin/enable-room" }

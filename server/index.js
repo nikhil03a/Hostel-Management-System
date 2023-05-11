@@ -37,7 +37,7 @@ app.post('/warden/login', async (req, res) => {
     };
     db.query("select id from wardenauth where username=? and password=? limit 1", [user.username, user.password], (err, data) => {
         if (data.length > 0) {
-            res.json({ result: 'SUCCESS', token:'wardenwarden' });
+            res.json({ result: 'SUCCESS', token:'wardenwarden', id:data[0].id});
         } else {
             res.json({ result: 'ERROR', message: "User id or password is not correct!" });
         }
@@ -76,7 +76,7 @@ app.post('/admin/approval',async(req,res)=>{
     });
     
 })
-app.get('/warden/approval',async (req,res)=>{
+app.get('/warden/approval/:id',async (req,res)=>{
     db.query("select * from student where approved=0", (err, data) => {
         if (data.length > 0) {
             res.json(data);
@@ -85,7 +85,7 @@ app.get('/warden/approval',async (req,res)=>{
         }
     });
 })
-app.post('/warden/approval',async(req,res)=>{
+app.post('/warden/approval/:id',async(req,res)=>{
     const user = {
         id:req.body.id,
         uname: req.body.uname,

@@ -2,5 +2,5 @@
 @tailwind components;
 @tailwind utilities;
 .navbar-custom{
-    color:white;
+    background-color: #4b0082;
 }

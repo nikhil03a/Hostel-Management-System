@@ -37,10 +37,12 @@ const WardenLoginPage = () => {
         .then(data => {
           const result = data.result
           const token = data.token
+          const id = data.id;
           if (result === 'SUCCESS' && token === 'wardenwarden') {
             localStorage.clear();
             localStorage.setItem('user-token', token);
-            navigate('/warden');
+            localStorage.setItem('id', id)
+            navigate('/warden/'+id);
           }else{
             setError("Username or Password is incorrect !!");
             return;

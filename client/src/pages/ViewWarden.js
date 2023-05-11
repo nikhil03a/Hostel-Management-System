@@ -23,7 +23,7 @@ const ViewWarden = () => {
         <div className='relative'>
             <Navbar />
             <div className='flex space-x-10'>
-                <div><SideBar user='admin' links={[
+                <div><SideBar user='Admin' links={[
                     { label: "Authenticate Warden", path: "/admin/approval" },
                     { label: "View Warden Details", path: "/admin/view-warden" },
                     { label: "Enable Room Allocation", path: "/admin/enable-room" }

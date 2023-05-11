@@ -22,7 +22,7 @@ function App() {
         <Route exact path='/admin-login' element={<AdminLoginPage />}></Route>
         <Route exact path='/admin' element={<AdminPage />}></Route>
         <Route exact path='/warden-login' element={<WardenLoginPage />}></Route>
-        <Route exact path='/warden' element={<WardenPage />}></Route>
+        <Route path='/warden/:id' element={<WardenPage />}></Route>
         <Route exact path='/student-login' element={<StudentLoginPage />}></Route>
         <Route exact path='/student-register' element={<StudentRegForm />}></Route>
         <Route path='/student/:id' element={<StudentPage />}></Route>
@@ -32,7 +32,7 @@ function App() {
         <Route path='/student/room/:id' element={<StudentRoom />}></Route>
         <Route exact path='/student-register' element={<StudentRegForm />}></Route>
         <Route exact path='/warden-register' element={<WardenRegForm />}></Route>
-        <Route exact path='/warden/approval' element={<WardenApproval />}></Route>
+        <Route path='/warden/approval/:id' element={<WardenApproval />}></Route>
       </Routes>
     </BrowserRouter>
 

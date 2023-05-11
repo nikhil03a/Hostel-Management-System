@@ -22,7 +22,7 @@ const WardenApproval = () => {
     const [details, setDetails] = useState([])
     useEffect(() => {
         const getDetails = async () => {
-            await fetch("http://localhost:8800/warden/approval", {
+            await fetch("http://localhost:8800/warden/approval/"+localStorage.getItem('id'), {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json"
@@ -54,9 +54,9 @@ const WardenApproval = () => {
             <Navbar />
             <div className='flex space-x-10'>
                 <div><SideBar links={[
-                    { label: "Dashboard", path: '/warden' },
-                    { label: "Authenticate Student", path: "/warden/approval" },
-                    { label: "View Student Details", path: "/warden/view-student" }]} />
+                    { label: "Dashboard", path: '/warden/'+localStorage.getItem('id') },
+                    { label: "Authenticate Student", path: "/warden/approval/"+localStorage.getItem('id') },
+                    { label: "View Student Details", path: "/warden/view-student/"+localStorage.getItem('id') }]} />
                 </div>
                 <div>
                     {renderedItems}
