@@ -56,6 +56,38 @@ app.post('/student/login', async (req, res) => {
         }
     });
 })
+app.post('/student-register',async (req,res)=>{
+    const user = {
+        name:req.body.name,
+        dob:req.body.dob,
+        gender:req.body.gender,
+        email:req.body.email,
+        mobile:req.body.mobile,
+        bloodgroup:req.body.bloodgroup,
+        clgname:req.body.clgname,
+        rollno:req.body.rollno,
+        degree:req.body.degree,
+        year:req.body.year,
+        semester:req.body.semester,
+        joindate:req.body.joindate,
+        country:req.body.country,
+        city:req.body.city,
+        address:req.body.address,
+        pcode:req.body.pcode,
+        fname:req.body.fname,
+        fphone:req.body.fphone,
+        foccupation:req.body.foccupation,
+        mname:req.body.mname,
+        mphone:req.body.mphone,
+        moccupation:req.body.moccupation,
+        password:req.body.password
+    }
+    db.query("insert into student (name,dob,gender,email,mobile,bloodgroup,college,rno,deg,year,sem,doj,country,city,address,pin,father,fathermobile,fatherocc,mother,mothermobile,motherocc,password,approved) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0)", [user.name,user.dob,user.gender,user.email,user.mobile,user.bloodgroup,user.clgname,user.rollno,user.degree,user.year,user.semester,user.joindate,user.country,user.city,user.address,user.pcode,user.fname,user.fphone,user.foccupation,user.mname,user.mphone,user.moccupation,user.password],(err,data)=>{
+        if(err) console.log(err);
+        console.log(user);
+        res.send({message:"SUCCESS"})
+    })
+})
 app.get('/admin/approval',async (req,res)=>{
     db.query("select * from warden where approved=0", (err, data) => {
         if (data.length > 0) {
