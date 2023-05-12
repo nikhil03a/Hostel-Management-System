@@ -2,6 +2,7 @@ import Navbar from '../components/Navbar';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import SideBar from '../components/SideBar';
+import swal from 'sweetalert';
 const StudentRoom = () => {
     const [isAlloted, setIsAlloted] = useState(false);
     const navigate = useNavigate();
@@ -59,6 +60,8 @@ const StudentRoom = () => {
             if (message != "NA") {
                 setIsAlloted(true);
                 setData({ "hostel": data.hostel, "room": data.room })
+            }else{
+                setData({...data,"hostel":data.hostel})
             }
         })
             .catch(error => {
@@ -73,14 +76,13 @@ const StudentRoom = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (data.hostel === "") {
-            setError("Please select Hostel");
+            swal("Error","Select Hostel","error")
             return;
         }
         else if (data.room === "") {
-            setError("Please select Room No.");
+            swal("Error","Select Room No.","error");
             return;
         }
-        else setError("")
         await fetch("http://localhost:8800/student/room/" + localStorage.getItem("id"), {
             method: 'POST',
             body: JSON.stringify({
@@ -97,9 +99,10 @@ const StudentRoom = () => {
             .then(data => {
                 const message = data.message
                 if (message === 'SUCCESS') {
+                    swal("Room Allocated Successfully","","success")
                     setIsAlloted(true);
                 } else {
-                    setError("Room not Available")
+                    swal("Sorry","Room not available","warning")
                     return;
                 }
             })
@@ -139,7 +142,7 @@ const StudentRoom = () => {
                                             <label className='block text-sm font-semibold text-gray-800'>Hostel</label>
                                             <select name="hostel" value={data.hostel} onChange={handleChange} className='block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40' required>
                                                 <option value={null} selected>Select Hostel</option>
-                                                <option value='kurinji'>Kurinji</option>
+                                                <option value={data.hostel}>{data.hostel}</option>
                                             </select>
                                         </div>
                                         <div>

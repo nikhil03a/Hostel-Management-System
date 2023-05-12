@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 const StudentLoginPage = () => {
   const navigate = useNavigate();
   const [uname, setUname] = useState('');
@@ -14,10 +15,10 @@ const StudentLoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (uname === "") {
-      setError("Please enter a valid username");
+      swal("Validation Error","Enter a valid username","error")
       return;
     } else if (pass === "") {
-      setError("Please enter password !!");
+      swal("Validation Error","Enter a valid password","error")
       return;
     }
     await fetch("http://localhost:8800/student/login", {
@@ -41,9 +42,12 @@ const StudentLoginPage = () => {
           localStorage.clear();
           localStorage.setItem('user-token', token);
           localStorage.setItem('id', id)
+          swal("Successfully Logged in","","success")
           navigate('/student/' + id);
-        } else {
-          setError("Username or Password is incorrect !!")
+        } else if(result === 'WAIT') {
+          swal("Please try after sometime","Your registration is yet to be approved by the warden","warning")
+        }else {
+          swal("Error","Username or password is incorrect","error")
         }
       })
       .catch(error => {

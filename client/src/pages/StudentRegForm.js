@@ -1,6 +1,21 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert'
 const StudentRegForm = () => {
+  var dtToday = new Date();
+  var month = dtToday.getMonth() + 1;
+  var day = dtToday.getDate();
+  var year = dtToday.getFullYear();
+  if (month < 10)
+    month = '0' + month.toString();
+  if (day < 10)
+    day = '0' + day.toString();
+  var minDate = year + '-' + month + '-' + day;
+  const maxDate = "2008-12-31";
+  var validEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  var validMobile = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+  var validPcode = /^\d{6}$/;
+  var validPassword = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/
   const [details, setdetails] = useState({
     name: "",
     email: "",
@@ -34,32 +49,79 @@ const StudentRegForm = () => {
       return { ...prev, [name]: value };
     });
   }
-  const handleSubmit = async(e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch("http://localhost:8800/student-register", {
-      method: 'POST',
-      body: JSON.stringify({
-        ...details
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then((response) => {
-        return response.json()
-      })
-      .then(data => {
-        const message = data.message
-        if (message === 'SUCCESS') {
-          navigate('/')
-        } else {
-          
+    if (details.name === '') {
+      swal("Validation Error", "Please enter your name", "error");
+    } else if(!details.email.match(validEmail)){
+      swal("Validation Error", "Please enter a valid email", "error");
+    }else if(details.dob === '' || details.dob>maxDate){
+      swal("Validation Error", "Please enter a valid Date of Birth", "error");
+    }else if(!details.mobile.match(validMobile)){
+      swal("Validation Error", "Please enter a valid mobile number", "error");
+    }else if(details.gender === ''){
+      swal("Validation Error", "Please select a gender", "error");
+    }else if(details.bloodgroup === ''){
+      swal("Validation Error", "Please select a Bloodgroup", "error");
+    }else if(details.clgname === ''){
+      swal("Validation Error", "Please select College Name", "error");
+    }else if(details.degree === ''){
+      swal("Validation Error", "Please select Degree", "error");
+    }else if(details.year === '' || details.year <=0 || details.year > 5){
+      swal("Validation Error", "Please enter a valid year of study", "error");
+    }else if(details.semester === '' || details.semester < (details.year*2 - 1) || details.semester > (details.year * 2)){
+      swal("Validation Error", "Please enter valid value for semester field", "error");
+    }else if(!details.rollno.match(validMobile)){
+      swal("Validation Error", "Please enter valid Roll Number", "error");
+    }else if(details.joindate === '' || details.joindate < minDate){
+      swal("Validation Error", "Please enter valid Joining Date", "error");
+    }else if(details.fname === ''){
+      swal("Validation Error", "Please enter your father's name", "error");
+    }else if(details.foccupation === ''){
+      swal("Validation Error", "Please enter your father's occupation", "error");
+    }else if(details.mname === ''){
+      swal("Validation Error", "Please enter your mother's name", "error");
+    }else if(details.moccupation === ''){
+      swal("Validation Error", "Please enter your mother's occupation", "error");
+    }else if(!details.fphone.match(validMobile)){
+      swal("Validation Error", "Father's Mobile Number is invalid", "error");
+    }else if(!details.mphone.match(validMobile)){
+      swal("Validation Error", "Mother's Mobile Number is invalid", "error");
+    }else if(details.country === ''){
+      swal("Validation Error", "Please enter your country", "error");
+    }else if(details.address === ''){
+      swal("Validation Error", "Please enter your address", "error");
+    }else if(details.city === ''){
+      swal("Validation Error", "Please enter your city", "error");
+    }else if(!details.pcode.match(validPcode)){
+      swal("Validation Error", "Please enter a valid PIN code", "error");
+    }else if(!details.password.match(validPassword)){
+      swal("Validation Error", "Please enter a valid Password. The password must contain atleast 8 characters including Lowercase, Uppercase, Number and a special symbol", "error");
+    }
+    else {
+      await fetch("http://localhost:8800/student-register", {
+        method: 'POST',
+        body: JSON.stringify({
+          ...details
+        }),
+        headers: {
+          "Content-Type": "application/json"
         }
-      })
-      .catch(error => {
+      }).then((response) => {
+        return response.json()
+      }).then(data => {
+        const message = data.message
+        if (message === 'AE') {
+          swal("Error","User Already Registered","warning");
+        } else if(message ==='SUCCESS'){
+          swal("Successfully registered","You will be able to login once the warden approves your request","success")
+          navigate('/')
+        }
+      }).catch(error => {
         window.alert(error);
         return;
       })
+    }
   }
 
 
@@ -126,6 +188,7 @@ const StudentRegForm = () => {
                       <input
                         type="date"
                         name='dob'
+                        max={maxDate}
                         required
                         onChange={handlechange}
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
@@ -161,7 +224,6 @@ const StudentRegForm = () => {
                         <option disabled selected>Select Gender</option>
                         <option value='M'>Male</option>
                         <option value='F'>Female</option>
-                        <option value='O'>Others</option>
                       </select>
                     </div>
                   </div>
@@ -201,10 +263,10 @@ const StudentRegForm = () => {
                         College Name
                       </label>
                       <select name='clgname' required
-                        onChange={handlechange} defaultValue="CEG"
+                        onChange={handlechange}
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       >
-                        <option disabled selected value={null}>Select </option>
+                        <option disabled selected>Select</option>
                         <option value='CEG'>CEG</option>
                       </select>
 
@@ -297,6 +359,7 @@ const StudentRegForm = () => {
                         Joining date
                       </label>
                       <input
+                        min={minDate}
                         type="date"
                         name='joindate' required
                         onChange={handlechange}
