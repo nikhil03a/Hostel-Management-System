@@ -23,10 +23,12 @@ const ViewWarden = () => {
         <div className='relative'>
             <Navbar />
             <div className='flex space-x-10'>
-                <div><SideBar user='Admin' links={[
+                <div><SideBar user="Admin" links={[
+                    { label: "DashBoard", path: '/admin' },
                     { label: "Authenticate Warden", path: "/admin/approval" },
                     { label: "View Warden Details", path: "/admin/view-warden" },
-                    { label: "Enable Room Allocation", path: "/admin/enable-room" }
+                    { label: "Enable Room Allocation", path: "/admin/enable-room" },
+                    { label: "View Student Details", path: '/admin/view-student' }
                 ]} />
                 </div>
 

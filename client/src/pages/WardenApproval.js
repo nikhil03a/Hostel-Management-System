@@ -56,7 +56,9 @@ const WardenApproval = () => {
                 <div><SideBar links={[
                     { label: "Dashboard", path: '/warden/'+localStorage.getItem('id') },
                     { label: "Authenticate Student", path: "/warden/approval/"+localStorage.getItem('id') },
-                    { label: "View Student Details", path: "/warden/view-student/"+localStorage.getItem('id') }]} />
+                    { label: "View Student Details", path: "/warden/view-student/"+localStorage.getItem('id') },
+                    { label: "Mark Attendance", path:'/warden/attendance/'+localStorage.getItem('id')},
+                    {label: "Update Mess Bill", path: '/warden/mess/'+localStorage.getItem('id')}]} />
                 </div>
                 <div>
                     {renderedItems}

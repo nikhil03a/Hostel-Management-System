@@ -14,6 +14,13 @@ import ViewWarden from './pages/ViewWarden';
 import StudentRoom from './pages/StudentRoom';
 import WardenRegForm from './pages/WardenRegForm';
 import WardenApproval from './pages/WardenApproval';
+import MarkAttendance from './pages/MarkAttendance'
+import UpdateMessBill from './pages/UpdateMessBill';
+import ViewStudent from './pages/ViewStudent';
+import ViewMessBill from './pages/ViewMessBill';
+import ViewAttendance from './pages/ViewAttendance';
+import ApplyMessReduction from './pages/ApplyMessReduction';
+import AdminViewStudent from './pages/AdminViewStudent';
 function App() {
   return (
     <BrowserRouter>
@@ -33,6 +40,13 @@ function App() {
         <Route exact path='/student-register' element={<StudentRegForm />}></Route>
         <Route exact path='/warden-register' element={<WardenRegForm />}></Route>
         <Route path='/warden/approval/:id' element={<WardenApproval />}></Route>
+        <Route path='/warden/attendance/:id' element={<MarkAttendance />}></Route>
+        <Route path='/warden/mess/:id' element={<UpdateMessBill />}></Route>
+        <Route path='/warden/view-student/:id' element={<ViewStudent />}></Route>
+        <Route path='/student/messbill/:id' element={<ViewMessBill />}></Route>
+        <Route path='/student/attendance/:id' element={<ViewAttendance />}></Route>
+        <Route path='/student/reduction/:id' element={<ApplyMessReduction />}></Route>
+        <Route exact path='/admin/view-student' element={<AdminViewStudent />}></Route>
       </Routes>
     </BrowserRouter>
 

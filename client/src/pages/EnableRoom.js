@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 const EnableRoom = () => {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isEnable,setIsEnabled] = useState(false);
+    const [isEnable, setIsEnabled] = useState(false);
     const checkUserToken = () => {
         const userToken = localStorage.getItem('user-token');
         if (userToken === 'adminadmin') {
@@ -18,7 +18,7 @@ const EnableRoom = () => {
     useEffect(() => {
         checkUserToken();
     }, [isLoggedIn])
-    
+
     const checkIfEnabled = async () => {
         await fetch("http://localhost:8800/admin/room-enable", {
             method: 'GET',
@@ -33,10 +33,10 @@ const EnableRoom = () => {
                 setIsEnabled(true);
             }
         })
-        .catch(error => {
-            window.alert(error);
-            return;
-        })
+            .catch(error => {
+                window.alert(error);
+                return;
+            })
     }
     useEffect(() => {
         checkIfEnabled();
@@ -44,7 +44,7 @@ const EnableRoom = () => {
     const handleClick = async () => {
         await fetch("http://localhost:8800/admin/room-enable", {
             method: 'POST',
-            body:JSON.stringify({
+            body: JSON.stringify({
                 value: isEnable ? 0 : 1
             }),
             headers: {
@@ -56,9 +56,10 @@ const EnableRoom = () => {
             const message = data.message
             if (message === 'SUCCESS') {
                 setIsEnabled(!isEnable);
-            }else{
+            } else {
                 setIsEnabled(!isEnable);
-            }}).catch(error => {
+            }
+        }).catch(error => {
             window.alert(error);
             return;
         })
@@ -68,15 +69,17 @@ const EnableRoom = () => {
             <Navbar />
             <div className='flex space-x-8'>
                 <div>
-                    <SideBar links={[
+                    <SideBar user="Admin" links={[
+                        { label: "DashBoard", path: '/admin' },
                         { label: "Authenticate Warden", path: "/admin/approval" },
                         { label: "View Warden Details", path: "/admin/view-warden" },
-                        { label: "Enable Room Allocation", path: "/admin/enable-room" }
+                        { label: "Enable Room Allocation", path: "/admin/enable-room" },
+                        { label: "View Student Details", path: '/admin/view-student' }
                     ]} />
                 </div>
                 <div className='mt-5'>
                     {isEnable ? <div> Room allocation process is currently enabled. Click below to disable</div> :
-                     <div>Room allocation process is currently disabled. Click below to enable</div>}
+                        <div>Room allocation process is currently disabled. Click below to enable</div>}
                     <br></br>
                     <button onClick={handleClick} className='cursor-pointer border p-2 bg-slate-100 rounded border-dashed hover:bg-slate-200'>Enable / Disable</button>
                 </div>

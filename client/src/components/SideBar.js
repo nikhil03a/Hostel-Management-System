@@ -7,7 +7,7 @@ import { TbReportAnalytics } from "react-icons/tb";
 import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
 import { FiMessageSquare, FiFolder, FiShoppingCart } from "react-icons/fi";
 const SideBar = ({ user, links }) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const renderedItems = links.map((link,i) => {
     return (
       <Link to={link.path} key={i} className="mt-5 group flex items-center text-sm  gap-3.5 font-medium p-2 hover:bg-gray-800 rounded-md">

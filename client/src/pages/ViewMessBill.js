@@ -1,8 +1,9 @@
 import Navbar from '../components/Navbar';
-import React,{useEffect,useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import SideBar from '../components/SideBar';
-const StudentPage = () => {
+import swal from 'sweetalert';
+const ViewMessBill = () => {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const checkUserToken = () => {
@@ -34,4 +35,4 @@ const StudentPage = () => {
     )
 }
 
-export default StudentPage
+export default ViewMessBill
