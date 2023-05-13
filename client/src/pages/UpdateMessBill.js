@@ -22,14 +22,24 @@ const UpdateMessBill = () => {
 
     const [data,setData] = useState({
         month:"",
-        year:"2023",
-        amount:0
+        year:"",
+        amount:""
     })
     const handleChange = (e)=>{
         setData({...data,[e.target.name]:e.target.value});
     }
     const handleSubmit = async (e)=>{
         e.preventDefault();
+        if(data.month === ''){
+            swal("Error","Select Month","error");
+            return;
+        }else if(data.year === ''){
+            swal("Error","Select Year","error");
+            return;
+        }else if(data.amount === ''){
+            swal("Error","Enter amount","error");
+            return;
+        }
         await fetch("http://localhost:8800/warden/mess/" + localStorage.getItem('id'), {
             method: 'POST',
             body: JSON.stringify({
@@ -49,6 +59,8 @@ const UpdateMessBill = () => {
                 if (data.message === 'SUCCESS') {
                     
                     swal("Mess Bill Updated Successfully", "", "success")
+                }else if(data.message === 'AE'){
+                    swal("Mess Bill already updated","","warning")
                 }
             })
             .catch(error => {
@@ -73,6 +85,7 @@ const UpdateMessBill = () => {
                     <br></br>
                     <label>Select Month: </label>
                     <select name='month' onChange={handleChange}>
+                        <option selected disabled>Select </option>
                         <option value='1'>January</option>
                         <option value='2'>February</option>
                         <option value='3'>March</option>
@@ -89,6 +102,7 @@ const UpdateMessBill = () => {
                     <br></br><br></br>
                     <label>Year: </label>
                     <select name='year' onChange={handleChange}>
+                        <option selected disabled>Select</option>
                         <option value='2023'>2023</option>
                     </select>
                     <br></br><br></br>

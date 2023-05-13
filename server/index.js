@@ -149,7 +149,7 @@ app.post('/admin/approval', async (req, res) => {
         uname: req.body.uname,
         pwd: req.body.pwd
     }
-    db.query("update warden set approved=1 where id=?", [user.id], (err, data) => {});
+    db.query("update warden set approved=1 where id=?", [user.id], (err, data) => { });
 
 })
 app.post('/admin/deny', async (req, res) => {
@@ -158,7 +158,7 @@ app.post('/admin/deny', async (req, res) => {
         uname: req.body.uname,
         pwd: req.body.pwd
     }
-    db.query("delete from warden where id=?", [user.id], (err, data) => {});
+    db.query("delete from warden where id=?", [user.id], (err, data) => { });
 
 })
 app.post('/warden/deny', async (req, res) => {
@@ -167,7 +167,7 @@ app.post('/warden/deny', async (req, res) => {
         uname: req.body.uname,
         pwd: req.body.pwd
     }
-    db.query("delete from student where id=?", [user.id], (err, data) => {});
+    db.query("delete from student where id=?", [user.id], (err, data) => { });
 })
 app.get('/warden/approval/:id', async (req, res) => {
     db.query("select * from student where approved=0 and hostel=(select hostel from warden where id=?)", [req.params.id], (err, data) => {
@@ -189,12 +189,12 @@ app.post('/warden/approval/:id', async (req, res) => {
 app.post('/warden/students/:id', async (req, res) => {
     let hostel;
     db.query("select hostel from warden where id = ?", [req.params.id], (err, data) => {
-        hostel=data[0].hostel;
+        hostel = data[0].hostel;
         db.query("select * from attendance where date=? and hostel=?", [req.body.date, data[0].hostel], (err, data) => {
             if (data.length > 0) {
                 res.json({ message: "AE" })
             } else {
-                db.query("select * from student join hostelstudent join hostelvacancy on student.id=hostelstudent.studentid and hostelstudent.roomid=hostelvacancy.id where student.hostel=? and student.doj<=?", [hostel,req.body.date], (err, data) => {
+                db.query("select * from student join hostelstudent join hostelvacancy on student.id=hostelstudent.studentid and hostelstudent.roomid=hostelvacancy.id where student.hostel=? and student.doj<=?", [hostel, req.body.date], (err, data) => {
                     res.json(data);
                 })
             }
@@ -205,8 +205,8 @@ app.post('/warden/attendance/:id', async (req, res) => {
     const arr = req.body.arr;
     arr.forEach(element => {
         if (element.attendance) {
-            db.query("insert into attendance (studid,date,hostel) values (?,?,?) ", [element.studentid, req.body.date, element.hostel],(err,data)=>{
-                res.json({message:"SUCCESS"})
+            db.query("insert into attendance (studid,date,hostel) values (?,?,?) ", [element.studentid, req.body.date, element.hostel], (err, data) => {
+                res.json({ message: "SUCCESS" })
             })
         }
     });
@@ -214,16 +214,16 @@ app.post('/warden/attendance/:id', async (req, res) => {
 app.post('/warden/mess/:id', async (req, res) => {
     let hostel;
     const month = req.body.month;
-    const year  = req.body.year;
+    const year = req.body.year;
     const amount = req.body.amount;
     db.query("select hostel from warden where id = ?", [req.params.id], (err, data) => {
-        hostel=data[0].hostel;
-        db.query("select * from messbill where month=? and year=? and hostel=?", [month,year, data[0].hostel], (err, data) => {
+        hostel = data[0].hostel;
+        db.query("select * from messbill where month=? and year=? and hostel=?", [month, year, data[0].hostel], (err, data) => {
             if (data.length > 0) {
                 res.json({ message: "AE" })
             } else {
-                db.query("insert into messbill (hostel,month,year,amount) values (?,?,?,?)", [hostel,month,year,amount], (err, data) => {
-                    res.json({message:"SUCCESS"});
+                db.query("insert into messbill (hostel,month,year,amount) values (?,?,?,?)", [hostel, month, year, amount], (err, data) => {
+                    res.json({ message: "SUCCESS" });
                 })
             }
         })
@@ -274,6 +274,34 @@ app.post('/student/room/:id', async (req, res) => {
             res.json({ message: "NA" });
         }
     })
+})
+app.post('/student/apply-reduction/:id', (req, res) => {
+    const user = {
+        id: req.params.id,
+        from: req.body.from,
+        to: req.body.to,
+    }
+    const days = (Math.abs((new Date(req.body.from).getTime() - new Date(req.body.to).getTime()) / (1000 * 60 * 60 * 24)));
+    var check;
+    db.query("select * from reduction where studid=?", [user.id], (err, data) => {
+        for (var i = 0; i < data.length; i++) {
+            var efrom = data[i].from;
+            var eto = data[i].to;
+            if ((new Date(user.from) >= efrom && new Date(user.from) <= eto) || (new Date(user.to) >= efrom && new Date(user.to) <= eto) || (efrom >= new Date(user.from) && efrom <= new Date(user.to)) || (eto >= new Date(user.from) && eto <= new Date(user.to))) {
+                check = false;
+            }
+        }
+        if (check === false) {
+            return res.json({ message: "AE" })
+        } else {
+            db.query("insert into reduction (studid,`from`,`to`,days) values (?,?,?,?)", [user.id, user.from, user.to, days + 1], (err, data) => {
+                if (err) console.log(err);
+                res.json({ message: "SUCCESS" })
+            })
+        }
+    })
+
+
 })
 app.get("/student", (req, res) => {
     const q = "select * from student";
