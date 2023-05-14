@@ -48,8 +48,8 @@ const ApplyMessReduction = () => {
     e.preventDefault();
     if (data.from === '' || data.to === '' || data.from > data.to) {
       swal("Error", "Enter valid Dates", "error");
-    }
-    await fetch("http://localhost:8800/student/apply-reduction/" + localStorage.getItem('id'), {
+    }else{
+      await fetch("http://localhost:8800/student/apply-reduction/" + localStorage.getItem('id'), {
       method: 'POST',
       body: JSON.stringify({
         from: data.from,
@@ -75,6 +75,8 @@ const ApplyMessReduction = () => {
         window.alert(error);
         return;
       })
+    }
+    
   }
   return (
     <div className='relative'>

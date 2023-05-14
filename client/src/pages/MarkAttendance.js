@@ -55,8 +55,8 @@ const MarkAttendance = () => {
             })
             .then(data => {
                 if (data.message === 'SUCCESS') {
-                    setStudents(false);
                     swal("Attendance Marked Successfully", "", "success")
+                    setStudents(false);
                 }
             })
             .catch(error => {

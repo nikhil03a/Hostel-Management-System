@@ -203,32 +203,84 @@ app.post('/warden/students/:id', async (req, res) => {
 })
 app.post('/warden/attendance/:id', async (req, res) => {
     const arr = req.body.arr;
+    let count = 0;
     arr.forEach(element => {
         if (element.attendance) {
             db.query("insert into attendance (studid,date,hostel) values (?,?,?) ", [element.studentid, req.body.date, element.hostel], (err, data) => {
-                res.json({ message: "SUCCESS" })
+                if (err) {
+                }
+                db.query('select * from reduction where studid=? and ? between `from` and `to`', [element.studentid, new Date(req.body.date)], (err, data) => {
+                    if (err) {
+                    }
+                    if (data != undefined) {
+                        data.forEach((d) => {
+                            db.query("delete from reduction where id=?", [d.id], (err, data) => {
+                                if (err) {
+                                }
+                                count++;
+                                if (count === arr.length) {
+                                    res.json({ message: "SUCCESS" });
+                                }
+                            });
+                        })
+                    } else {
+                        count++;
+                        if (count === arr.length) {
+                            res.json({ message: "SUCCESS" });
+                        }
+                    }
+                })
             })
+        } else {
+            count++;
+            if (count === arr.length) {
+                res.json({ message: "SUCCESS" });
+            }
         }
     });
-})
+});
+
 app.post('/warden/mess/:id', async (req, res) => {
     let hostel;
     const month = req.body.month;
     const year = req.body.year;
     const amount = req.body.amount;
+    const startOfMonth = new Date(`${year}-${month}-01`);
+    const endOfMonth = new Date(startOfMonth.getFullYear(), startOfMonth.getMonth() + 1, 0);
     db.query("select hostel from warden where id = ?", [req.params.id], (err, data) => {
         hostel = data[0].hostel;
         db.query("select * from messbill where month=? and year=? and hostel=?", [month, year, data[0].hostel], (err, data) => {
             if (data.length > 0) {
                 res.json({ message: "AE" })
             } else {
-                db.query("insert into messbill (hostel,month,year,amount) values (?,?,?,?)", [hostel, month, year, amount], (err, data) => {
-                    res.json({ message: "SUCCESS" });
-                })
+                db.query("select id, doj from student where hostel=?", [hostel], (err, data) => {
+                    let totalDaysResided = 0;
+                    data.forEach(student => {
+                        const doj = new Date(student.doj);
+                        const daysInMonth = endOfMonth.getDate();
+                        let daysResided;
+                        if (doj.getFullYear() < year || (doj.getFullYear() === year && doj.getMonth() < month - 1)) {
+                            daysResided = daysInMonth;
+                        } else if (doj.getFullYear() == year && doj.getMonth() == month - 1) {
+                            daysResided = daysInMonth - doj.getDate() + 1;
+                        } else {
+                            daysResided = 0;
+                        }
+                        totalDaysResided += daysResided;
+                    });
+                    db.query("select sum(days) as reductionDays from reduction join student on student.id=reduction.studid where student.hostel=? and MONTH(`from`)=?", [hostel, month], (err, data) => {
+                        const reductionDays = data[0].reductionDays || 0;
+                        const finalDays = totalDaysResided - reductionDays;
+                        db.query( "insert into messbill (hostel,month,year,amount,days) values (?,?,?,?,?)", [hostel, month, year, amount, finalDays] ,(err, data) => {
+                            res.json({ message: "SUCCESS" });
+                        });
+                    });
+                });
             }
         })
     })
-})
+});
+
 app.get('/admin/room-enable', async (req, res) => {
     db.query("select value from roomenable where id=1", (err, data) => {
         if (data[0].value == 1) {
