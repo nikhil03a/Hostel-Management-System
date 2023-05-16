@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import Transitions from '../components/Transitions';
-import Particles from'react-particles-js'
 const WardenLoginPage = () => {
   const navigate = useNavigate();
   const [uname, setUname] = useState('');
@@ -15,44 +14,6 @@ const WardenLoginPage = () => {
   const handlePass = (e) => {
     setPass(e.target.value);
   }
-  const particleOptions = {
-    particles: {
-      number: {
-        value: 100,
-        density: {
-          enable: true,
-          value_area: 800,
-        },
-      },
-      shape: {
-        type: 'circle',
-        stroke: {
-          width: 0,
-          color: '#000000',
-        },
-      },
-      size: {
-        value: 3,
-        random: true,
-        anim: {
-          enable: false,
-          speed: 40,
-          size_min: 0.1,
-          sync: false,
-        },
-      },
-      opacity: {
-        value: 0.5,
-        random: true,
-        anim: {
-          enable: false,
-          speed: 1,
-          opacity_min: 0.1,
-          sync: false,
-        },
-      },
-    },
-  };
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -100,9 +61,7 @@ const WardenLoginPage = () => {
   }
   return (
     <Transitions>
-      
       <div>
-      <Particles params={particleOptions} />
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
           <div className="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-xl">
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">

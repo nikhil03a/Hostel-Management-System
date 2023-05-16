@@ -1,623 +1,419 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import GoogleMapReact from 'google-map-react'
 import Transitions from '../components/Transitions'
+import SwimmingPool from './images/swimmingpool.jpg'
+import Badminton from './images/badminton.jpg'
+import Internet from './images/internet.jpg'
+import Parking from './images/parking.jpg'
+import RoomService from './images/roomservice.jpg'
+import Water from './images/water.jpg'
+import Pic1 from './images/pic1.jpg'
+import Pic2 from './images/pic2.jpg'
+import HostelDay from './images/hostelday.jpg'
+import Pic3 from './images/pic3.jpg'
+import SportsDay from './images/sportsday.jpg'
+import Pic4 from './images/pic4.jpg'
+import MovieNight from './images/movienight.jpg'
+import Pic5 from './images/pic5.jpg'
+
+import Pic6 from './images/pic6.jpg'
+
+
 const HomePage = () => {
   useEffect(() => {
     localStorage.clear();
   })
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (!event.target.closest('#dropdownNavbarLink') && !event.target.closest('#dropdownNavbar')) {
+        setDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+  const data = [
+    {
+      image: SwimmingPool,
+      content: "Swimming Pool"
+    },{
+      image: Internet,
+      content: "High Speed Fibernet"
+    },{
+      image: Badminton,
+      content: 'Tennis Courts'
+    },{
+      image: Parking,
+      content: "Cycle Parking Areas"
+    },{
+      image: Water,
+      content: "RO Drinking Water"
+    },{
+      image: RoomService,
+      content: "Room Service"
+    }
+  ]
+  function toggleDropdown() {
+    setDropdownOpen(!isDropdownOpen);
+  }
   return (
     <Transitions>
-      <Link to='/admin-login'>Admin Login</Link><br></br>
-      <Link to='/warden-login'>Warden Login</Link><br></br>
-      <Link to='/student-login'>Student Login</Link><br></br>
       <div>
-        <>
-          <meta charSet="utf-8" />
-          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <title>Hostel Management</title>
-          <meta name="description" content="" />
-          {/* google fonts */}
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Gilda+Display&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-            rel="stylesheet"
-          />
-          {/* font awesome cdn   */}
-          <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-            crossOrigin="anonymous"
-            referrerPolicy="no-referrer"
-          />
-          {/* slick slider */}
-          {/* Add the slick-theme.css if you want default styling */}
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
-          />
-          {/* Add the slick-theme.css if you want default styling */}
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"
-          />
-          {/* date picker */}
-          <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css"
-            integrity="sha512-YdYyWQf8AS4WSB0WWdc3FbQ3Ypdm0QCWD2k4hgfqbQbRCJBEgX0iAegkl2S1Evma5ImaVXLBeUkIlP6hQ1eYKQ=="
-            crossOrigin="anonymous"
-            referrerPolicy="no-referrer"
-          />
-          <link rel="stylesheet" href="../dist/main.css" />
-          <nav className=" md:flex md:justify-between bg-gray-800 py-4">
-            <div className="flex justify-between">
-              <a
-                href="#"
-                className="font-gilda text-[28px] font-normal text-lion ml-5"
-              >
-                CEG  <span className="text-white">Hostels</span>
-              </a>
-              <button
-                type="button"
-                className="text-white md:hidden"
-                id="navbar-show-btn"
-              >
-                <i className="fas fa-bars" />
-              </button>
-            </div>
-            <div className="navbar-box fixed top-0 right-0 w-[280px] h-full bg-white p-5 flex flex-col items-center font-barlow-cond translate-x-full transition duration-300 ease-in-out md:relative md:translate-x-0 md:bg-transparent md:flex-row md:h-auto md:w-auto md:p-0">
-              <button
-                type="button "
-                className="absolute top-[18px] right-[18px] z-50 text-2xl hover:rotate-180 transition duration-300 ease-in-out md:hidden"
-                id="navbar-hide-btn"
-              >
-                <i className="fa-solid fa-xmark" />
-              </button>
-              <ul className="flex flex-col w-full text-center mt-[60px] md:flex-row md:mt-0">
-                <li className="py-3 border-b-[1px] border-solid md:py-0 md:border-none">
-                  <a
-                    href="#"
-                    className="text-eerie-black uppercase text-md tracking-[.12em] font-medium hover:text-lion transition duration-300 ease-in-out md:mx-[14px] xl:mx-5 2xl:mx-6 md:text-white"
-                  >
-                    home
-                  </a>
+
+        <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
+          <div class="max-w-screen-xl flex flex-wrap items-center justify-between mr-10 p-4">
+            <a href="#" class="flex items-center">
+              <img src="" class="h-8 mr-3" alt="Flowbite Logo" />
+              <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">CEG Hostels</span>
+            </a>
+            <button data-collapse-toggle="navbar-dropdown" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-dropdown" aria-expanded="false">
+              <span class="sr-only">Open main menu</span>
+              <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+            </button>
+            <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
+              <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <li>
+                  <a href="#" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">Home</a>
                 </li>
-                <li className="py-3 border-b-[1px] border-solid md:py-0 md:border-none">
-                  <a
-                    href="#"
-                    className="text-eerie-black uppercase text-md tracking-[.12em] font-medium hover:text-lion transition duration-300 ease-in-out md:mx-[14px] xl:mx-5 2xl:mx-6 md:text-white"
-                  >
-                    rooms
-                  </a>
+                <li>
+                  <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Events</a>
                 </li>
-                <li className="py-3 border-b-[1px] border-solid md:py-0 md:border-none">
-                  <a
-                    href="#"
-                    className="text-eerie-black uppercase text-md tracking-[.12em] font-medium hover:text-lion transition duration-300 ease-in-out md:mx-[14px] xl:mx-5 2xl:mx-6 md:text-white"
-                  >
-                    events
-                  </a>
+                <li>
+                  <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Gallery</a>
                 </li>
-                <li className="py-3 border-b-[1px] border-solid md:py-0 md:border-none">
-                  <a
-                    href="#"
-                    className="text-eerie-black uppercase text-md tracking-[.12em] font-medium hover:text-lion transition duration-300 ease-in-out md:mx-[14px] xl:mx-5 2xl:mx-6 md:text-white"
-                  >
-                    gallery
-                  </a>
+                <li>
+                  <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Amenities</a>
                 </li>
-                <li className="py-3 md:py-0">
-                  <a
-                    href="#"
-                    className="text-eerie-black uppercase text-md tracking-[.12em] font-medium hover:text-lion transition duration-300 ease-in-out md:mx-[14px] xl:mx-5 2xl:mx-6 md:text-white"
-                  >
-                    contact
-                  </a>
+                <li>
+                  <button id="dropdownNavbarLink" onClick={toggleDropdown} data-dropdown-toggle="dropdownNavbar" class="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Login <svg class="w-5 h-5 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></button>
+                  <div id="dropdownNavbar" className={`z-10 ${isDropdownOpen ? '' : 'hidden'
+                    } font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-24 dark:bg-gray-700 dark:divide-gray-600 absolute`} class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                      <li>
+                        <a href="/admin-login" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Admin</a>
+                      </li>
+                      <li>
+                        <a href="/warden-login" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Warden</a>
+                      </li>
+                      <li>
+                        <a href="/student-login" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Student</a>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
+
               </ul>
-
             </div>
-          </nav>
-          <section className="bg-nero min-h-[640px] mx-auto px-3 flex items-center py-16 mt-0">
-            <div className="container max-w-[1200px] mx-auto grid md:grid-cols-2 gap-14">
-              <div className="flex flex-col justify-center items-start">
-                <h3 className="text-coyote font-normal opacity-70 tracking-[.25em] font-barlow-cond text-xl sm:text-[22px] uppercase">
-                  welcome to
-                </h3>
-                <h1 className="font-gilda text-2xl sm:text-[38px] tracking-[.04em] font-normal py-3 text-white mb-3">
-                  Andermatt Resort &amp; Farm
-                </h1>
-                <p className="opacity-60 font-light font-barlow text-justify text-base sm:text-lg text-white">
-                  Andermatt is located in the middle of the Swiss Alps. In recent years,
-                  Andermatt Swiss Alps has expanded its infrastructure, created
-                  attractive opportunities for investors and created new jobs for the
-                  entire region.
-                </p>
+          </div>
+        </nav>
+
+        <section className="bg-white min-h-[640px] mx-auto px-3 flex items-center py-16 mt-0">
+          <div className="container max-w-[1200px] mx-auto grid md:grid-cols-2 gap-14">
+            <div className="flex flex-col justify-center items-start">
+              <h3 className="text-coyote font-normal opacity-70 tracking-[.25em] font-barlow-cond text-xl sm:text-[22px] uppercase">
+                welcome to
+              </h3>
+              <h1 className="font-gilda text-2xl sm:text-[38px] tracking-[.04em] font-normal py-3 text-gray-700 mb-3">
+                CEG Hostels
+              </h1>
+              <p className="opacity-60 font-light font-barlow text-justify text-base sm:text-lg text-gray-500">
+                CEG hostels provide hostel facilities to the students of College of Engineering Guindy which has legacy of over 230 years. Its known for its 
+                quality service at afforable fees. It is a well organised organization with great set of employees who thrive hard for the well being of the students.              </p>
+              
+            </div>
+          </div>
+        </section>
+        <section className="py-16 px-3 bg-white">
+          <div className="container max-w-[1200px] mx-auto">
+            <h2 className="font-gilda font-normal text-3xl sm:text-[46px] tracking-[.04em] text-coyote text-center mb-3">
+              Events
+            </h2>
+            <div className="flex items-center justify-center">
+              <img src="../images/img4.jpeg" alt="" />
+            </div>
+            <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3 mt-10">
+              <div className="min-h-[323px] relative">
+                <img
+                  src={HostelDay}
+                  className="w-full h-full object-cover"
+                />
+                <div className="text-white absolute bottom-2 left-2 right-2 bg-black/50 p-5">
+                  <div className="w-[70px] h-[70px] bg-lion rounded-full flex items-center justify-center flex-col uppercase font-mont text-sm absolute top-0 right-3 -translate-y-[50%]">
+                    <span className="font-bold tracking-widest text-xl inline-block">
+                      03
+                    </span>
+                    <span className="tracking-widest inline-block -mt-[3px]">
+                      apr
+                    </span>
+                  </div>
+                  <h3 className="font-gilda text-xl tracking-[.04em] uppercase">Hostel Day
+                  </h3>
+                  <p className="font-normal tracking-[.04em] font-barlow text-lg">
+                    Enjoy the dinner - <span className="font-light">07:00 PM</span>
+                  </p>
+                </div>
+              </div>
+              <div className="min-h-[323px] relative">
+                <img
+                  src={MovieNight}
+                  className="w-full h-full object-cover"
+                />
+                <div className="text-white absolute bottom-2 left-2 right-2 bg-black/50 p-5">
+                  <div className="w-[70px] h-[70px] bg-lion rounded-full flex items-center justify-center flex-col uppercase font-mont text-sm absolute top-0 right-3 -translate-y-[50%]">
+                    <span className="font-bold tracking-widest text-xl inline-block">
+                      06
+                    </span>
+                    <span className="tracking-widest inline-block -mt-[3px]">
+                      may
+                    </span>
+                  </div>
+                  <h3 className="font-gilda text-xl tracking-[.04em] uppercase">
+                    Movie Night
+                  </h3>
+                  <p className="font-normal tracking-[.04em] font-barlow text-lg">
+                   Fun with friends - <span className="font-light">09:00 PM</span>
+                  </p>
+                </div>
+              </div>
+              <div className="min-h-[323px] relative">
+                <img
+                  src={SportsDay}
+                  className="w-full h-full object-cover"
+                />
+                <div className="text-white absolute bottom-2 left-2 right-2 bg-black/50 p-5">
+                  <div className="w-[70px] h-[70px] bg-lion rounded-full flex items-center justify-center flex-col uppercase font-mont text-sm absolute top-0 right-3 -translate-y-[50%]">
+                    <span className="font-bold tracking-widest text-xl inline-block">
+                      10
+                    </span>
+                    <span className="tracking-widest inline-block -mt-[3px]">
+                      jun
+                    </span>
+                  </div>
+                  <h3 className="font-gilda text-xl tracking-[.04em] uppercase">
+                    Sports Day
+                  </h3>
+                  <p className="font-normal tracking-[.04em] font-barlow text-lg">
+                    Test your skills -{" "}
+                    <span className="font-light">06:00 PM</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="py-16 px-3 bg-light-gray">
+          <div className="container max-w-[1200px] mx-auto">
+            <h2 className="font-gilda font-normal text-3xl text-[46px] tracking-[.04em] text-coyote text-center mb-3">
+              Gallery
+            </h2>
+            <div className="flex items-center justify-center">
+              <img  alt="" />
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 mt-10">
+              <div className="group min-h-[260px] relative after:absolute after:content-[''] after:left-0 after:top-0 after:w-full after:h-full after:bg-gradient-to-t after:from-black/75 after:to-black/5 after:opacity-0 hover:after:opacity-100 after:transition after:duration-300 after:ease-in-out overflow-hidden">
+                <img
+                  src={Pic1}
+                  className="w-full h-full object-cover"
+                  alt=""
+                />
+                <div className="bg-lion text-white py-2 px-4 flex items-center justify-between absolute bottom-3 left-0 z-10 -translate-x-full group-hover:translate-x-0 transition duration-300 ease-in-out w-4/5">
+                  <span className="font-barlow text-lg font-normal">
+                    A/C Room
+                  </span>
+                </div>
+              </div>
+              <div className="group min-h-[260px] relative after:absolute after:content-[''] after:left-0 after:top-0 after:w-full after:h-full after:bg-gradient-to-t after:from-black/75 after:to-black/5 after:opacity-0 hover:after:opacity-100 after:transition after:duration-300 after:ease-in-out overflow-hidden">
+                <img
+                  src={Pic2}
+                  className="w-full h-full object-cover"
+                  alt=""
+                />
+                <div className="bg-lion text-white py-2 px-4 flex items-center justify-between absolute bottom-3 left-0 z-10 -translate-x-full group-hover:translate-x-0 transition duration-300 ease-in-out w-4/5">
+                  <span className="font-barlow text-lg font-normal">
+                    Non A/C Room
+                  </span>
+                  
+                </div>
+              </div>
+              <div className="group min-h-[260px] relative after:absolute after:content-[''] after:left-0 after:top-0 after:w-full after:h-full after:bg-gradient-to-t after:from-black/75 after:to-black/5 after:opacity-0 hover:after:opacity-100 after:transition after:duration-300 after:ease-in-out overflow-hidden">
+                <img
+                  src={Pic3}
+                  className="w-full h-full object-cover"
+                  alt=""
+                />
+                <div className="bg-lion text-white py-2 px-4 flex items-center justify-between absolute bottom-3 left-0 z-10 -translate-x-full group-hover:translate-x-0 transition duration-300 ease-in-out w-4/5">
+                  <span className="font-barlow text-lg font-normal">
+                    Dining Hall
+                  </span>
+                  
+                </div>
+              </div>
+              <div className="group min-h-[260px] relative after:absolute after:content-[''] after:left-0 after:top-0 after:w-full after:h-full after:bg-gradient-to-t after:from-black/75 after:to-black/5 after:opacity-0 hover:after:opacity-100 after:transition after:duration-300 after:ease-in-out overflow-hidden">
+                <img
+                  src={Pic4}
+                  className="w-full h-full object-cover"
+                  alt=""
+                />
+                <div className="bg-lion text-white py-2 px-4 flex items-center justify-between absolute bottom-3 left-0 z-10 -translate-x-full group-hover:translate-x-0 transition duration-300 ease-in-out w-4/5">
+                  <span className="font-barlow text-lg font-normal">
+                    Playing Area
+                  </span>
+                  
+                </div>
+              </div>
+              <div className="group min-h-[260px] relative after:absolute after:content-[''] after:left-0 after:top-0 after:w-full after:h-full after:bg-gradient-to-t after:from-black/75 after:to-black/5 after:opacity-0 hover:after:opacity-100 after:transition after:duration-300 after:ease-in-out overflow-hidden">
+                <img
+                  src={Pic5}
+                  className="w-full h-full object-cover"
+                  alt=""
+                />
+                <div className="bg-lion text-white py-2 px-4 flex items-center justify-between absolute bottom-3 left-0 z-10 -translate-x-full group-hover:translate-x-0 transition duration-300 ease-in-out w-4/5">
+                  <span className="font-barlow text-lg font-normal">
+                    Bunker Cot
+                  </span>
+                  
+                </div>
+              </div>
+              <div className="group min-h-[260px] relative after:absolute after:content-[''] after:left-0 after:top-0 after:w-full after:h-full after:bg-gradient-to-t after:from-black/75 after:to-black/5 after:opacity-0 hover:after:opacity-100 after:transition after:duration-300 after:ease-in-out overflow-hidden">
+                <img
+                  src={Pic6}
+                  className="w-full h-full object-cover"
+                  alt=""
+                />
+                <div className="bg-lion text-white py-2 px-4 flex items-center justify-between absolute bottom-3 left-0 z-10 -translate-x-full group-hover:translate-x-0 transition duration-300 ease-in-out w-4/5">
+                  <span className="font-barlow text-lg font-normal">
+                    Library
+                  </span>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="py-16 px-3 bg-banner-image bg-center bg-cover bg-fixed bg-no-repeat">
+          <div className="container max-w-[1200px] mx-auto">
+            <h2 className="font-gilda font-normal text-3xl sm:text-[46px] tracking-[.04em] text-coyote text-center mb-3">
+              Our Hostel Services
+            </h2>
+            <div className="flex items-center justify-center">
+              <img src="../images/img4.jpeg" alt="" />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {data.map((item, index) => (
+                <div key={index} className="relative">
+                  <img
+                    className="w-full h-full object-cover rounded-lg"
+                    src={item.image}
+                    alt={item.content}
+                  />
+                  <div className="absolute bottom-0 left-0 w-full bg-gray-800 bg-opacity-75 text-white p-4">
+                    <p className="text-center">{item.content}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </section>
+        <footer>
+          <div className="bg-nero py-16 px-3">
+            <div className="grid max-w-[1200px] mx-auto gap-8 text-center md:grid-cols-2 md:text-start lg:grid-cols-footer">
+              <div className="md:me-2 lg:me-3">
                 <a
-                  href="#"
-                  className="bg-lion font-barlow px-4 min-w-[158px] min-h-[48px] inline-flex items-center justify-center uppercase text-white transition duration-300 ease-in-out hover:bg-lion-dark mt-8 tracking-widest"
+                  href="index.html"
+                  className="text-lion font-gilda font-normal text-2xl tracking-[.04em]"
                 >
-                  know more
+                  CEG<span className="text-white">Hostels</span>
                 </a>
+                <p className="text-white font-light font-barlow text-base mt-3 max-w-[480px] mx-auto md:ms-0">
+                  Staying in hostels can be the biggest adventure of your travels.
+                  Therefore some great memories can be made and relived through these
+                  quotes about hostel life.
+                </p>
               </div>
-              <div className="welcome-slider overflow-hidden">
-                <div className="h-[425px]">
-                  <img
-                    className="w-full h-full object-cover"
-                    src="../images/img4.jpeg"
-                    alt="welcome image"
-                  />
-                </div>
-                <div className="h-[425px]">
-                  <img
-                    className="w-full h-full object-cover"
-                    src="./images/build.jpeg"
-                    alt="welcome image"
-                  />
-                </div>
-                <div className="h-[425px]">
-                  <img
-                    className="w-full h-full object-cover"
-                    src="./images/lib.jpeg"
-                    alt="welcome image"
-                  />
-                </div>
+              <div>
+                <h4 className="inline-block font-gilda tracking-[.04em] text-lg text-white capitalize relative after:absolute after:content-[''] after:left-0 after:-bottom-0 after:h-[1px] after:w-full after:bg-coyote pb-1 mb-4">
+                our services
+                </h4>
+                <ul>
+                  <li className="my-2">
+                    <a
+                      href="#"
+                      className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
+                    >
+                     Safe Environment
+                    </a>
+                  </li>
+                  <li className="my-2">
+                    <a
+                      href="#"
+                      className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
+                    >
+                      Healthy Food
+                    </a>
+                  </li>
+                  <li className="my-2">
+                    <a
+                      href="#"
+                      className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
+                    >
+                      Hygienic Rooms
+                    </a>
+                  </li>
+                  <li className="my-2">
+                    <a
+                      href="#"
+                      className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
+                    >
+                      Peaceful Environment
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="inline-block font-gilda tracking-[.04em] text-lg text-white capitalize relative after:absolute after:content-[''] after:left-0 after:-bottom-0 after:h-[1px] after:w-full after:bg-coyote pb-1 mb-4">
+                  contact
+                </h4>
+                <ul>
+                  <li className="my-2 grid grid-cols-[40px_auto] justify-center md:justify-start">
+                    <span className="text-white">
+                      <i className="fas fa-map-marker-alt" />
+                    </span>
+                    <span className="text-white/50 font-light">
+                      Anna University, Chennai
+                    </span>
+                  </li>
+                  <li className="my-2 grid grid-cols-[40px_auto] justify-center md:justify-start ">
+                    <span className="text-white">
+                      <i className="fas fa-phone" />
+                    </span>
+                    <span className="text-white/50 font-light">0421 4312 3241</span>
+                  </li>
+                  <li className="my-2 grid grid-cols-[40px_auto] justify-center md:justify-start">
+                    <span className="text-white">
+                      <i className="fas fa-envelope" />
+                    </span>
+                    <span className="text-white/50 font-light">
+                      info.ceghostel@mail.com
+                    </span>
+                  </li>
+                </ul>
               </div>
             </div>
-          </section>
-          <section className="py-16 px-3 bg-white">
-            <div className="container max-w-[1200px] mx-auto">
-              <h2 className="font-gilda font-normal text-3xl sm:text-[46px] tracking-[.04em] text-coyote text-center mb-3">
-                Events
-              </h2>
-              <div className="flex items-center justify-center">
-                <img src="../images/img4.jpeg" alt="" />
-              </div>
-              <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3 mt-10">
-                <div className="min-h-[323px] relative">
-                  <img
-                    src="../images/img4.jpeg"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="text-white absolute bottom-2 left-2 right-2 bg-black/50 p-5">
-                    <div className="w-[70px] h-[70px] bg-lion rounded-full flex items-center justify-center flex-col uppercase font-mont text-sm absolute top-0 right-3 -translate-y-[50%]">
-                      <span className="font-bold tracking-widest text-xl inline-block">
-                        03
-                      </span>
-                      <span className="tracking-widest inline-block -mt-[3px]">
-                        apr
-                      </span>
-                    </div>
-                    <h3 className="font-gilda text-xl tracking-[.04em] uppercase">
-                      decade nights
-                    </h3>
-                    <p className="font-normal tracking-[.04em] font-barlow text-lg">
-                      Saturday Music Fest - <span className="font-light">07:00 PM</span>
-                    </p>
-                  </div>
-                </div>
-                <div className="min-h-[323px] relative">
-                  <img
-                    src="../images/img4.jpeg"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="text-white absolute bottom-2 left-2 right-2 bg-black/50 p-5">
-                    <div className="w-[70px] h-[70px] bg-lion rounded-full flex items-center justify-center flex-col uppercase font-mont text-sm absolute top-0 right-3 -translate-y-[50%]">
-                      <span className="font-bold tracking-widest text-xl inline-block">
-                        06
-                      </span>
-                      <span className="tracking-widest inline-block -mt-[3px]">
-                        may
-                      </span>
-                    </div>
-                    <h3 className="font-gilda text-xl tracking-[.04em] uppercase">
-                      wine tastings
-                    </h3>
-                    <p className="font-normal tracking-[.04em] font-barlow text-lg">
-                      Special Wine Dinner - <span className="font-light">09:00 PM</span>
-                    </p>
-                  </div>
-                </div>
-                <div className="min-h-[323px] relative">
-                  <img
-                    src="../images/img4.jpeg"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="text-white absolute bottom-2 left-2 right-2 bg-black/50 p-5">
-                    <div className="w-[70px] h-[70px] bg-lion rounded-full flex items-center justify-center flex-col uppercase font-mont text-sm absolute top-0 right-3 -translate-y-[50%]">
-                      <span className="font-bold tracking-widest text-xl inline-block">
-                        10
-                      </span>
-                      <span className="tracking-widest inline-block -mt-[3px]">
-                        jun
-                      </span>
-                    </div>
-                    <h3 className="font-gilda text-xl tracking-[.04em] uppercase">
-                      love is in the air
-                    </h3>
-                    <p className="font-normal tracking-[.04em] font-barlow text-lg">
-                      Students hostel Librarey -{" "}
-                      <span className="font-light">06:00 PM</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section className="py-16 px-3 bg-light-gray">
-            <div className="container max-w-[1200px] mx-auto">
-              <h2 className="font-gilda font-normal text-3xl text-[46px] tracking-[.04em] text-coyote text-center mb-3">
-                Gallery
-              </h2>
-              <div className="flex items-center justify-center">
-                <img src="../images/img4.jpeg" alt="" />
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 mt-10">
-                <div className="group min-h-[260px] relative after:absolute after:content-[''] after:left-0 after:top-0 after:w-full after:h-full after:bg-gradient-to-t after:from-black/75 after:to-black/5 after:opacity-0 hover:after:opacity-100 after:transition after:duration-300 after:ease-in-out overflow-hidden">
-                  <img
-                    src="../images/img4.jpeg"
-                    className="w-full h-full object-cover"
-                    alt=""
-                  />
-                  <div className="bg-lion text-white py-2 px-4 flex items-center justify-between absolute bottom-3 left-0 z-10 -translate-x-full group-hover:translate-x-0 transition duration-300 ease-in-out w-4/5">
-                    <span className="font-barlow text-lg font-normal">
-                      Fancy student Room
-                    </span>
-                    <ul className="flex items-center">
-                      <li className="text-sm">
-                        <i className="fas fa-star" />
-                      </li>
-                      <li className="text-sm ms-1">
-                        <i className="fas fa-star" />
-                      </li>
-                      <li className="text-sm ms-1">
-                        <i className="fas fa-star" />
-                      </li>
-                      <li className="text-sm ms-1">
-                        <i className="fas fa-star" />
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="group min-h-[260px] relative after:absolute after:content-[''] after:left-0 after:top-0 after:w-full after:h-full after:bg-gradient-to-t after:from-black/75 after:to-black/5 after:opacity-0 hover:after:opacity-100 after:transition after:duration-300 after:ease-in-out overflow-hidden">
-                  <img
-                    src="../images/img4.jpeg"
-                    className="w-full h-full object-cover"
-                    alt=""
-                  />
-                  <div className="bg-lion text-white py-2 px-4 flex items-center justify-between absolute bottom-3 left-0 z-10 -translate-x-full group-hover:translate-x-0 transition duration-300 ease-in-out w-4/5">
-                    <span className="font-barlow text-lg font-normal">
-                      Fancy student Room
-                    </span>
-                    <ul className="flex items-center">
-                      <li className="text-sm">
-                        <i className="fas fa-star" />
-                      </li>
-                      <li className="text-sm ms-1">
-                        <i className="fas fa-star" />
-                      </li>
-                      <li className="text-sm ms-1">
-                        <i className="fas fa-star" />
-                      </li>
-                      <li className="text-sm ms-1">
-                        <i className="fas fa-star" />
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="group min-h-[260px] relative after:absolute after:content-[''] after:left-0 after:top-0 after:w-full after:h-full after:bg-gradient-to-t after:from-black/75 after:to-black/5 after:opacity-0 hover:after:opacity-100 after:transition after:duration-300 after:ease-in-out overflow-hidden">
-                  <img
-                    src="../images/img4.jpeg"
-                    className="w-full h-full object-cover"
-                    alt=""
-                  />
-                  <div className="bg-lion text-white py-2 px-4 flex items-center justify-between absolute bottom-3 left-0 z-10 -translate-x-full group-hover:translate-x-0 transition duration-300 ease-in-out w-4/5">
-                    <span className="font-barlow text-lg font-normal">
-                      Fancy student Room
-                    </span>
-                    <ul className="flex items-center">
-                      <li className="text-sm">
-                        <i className="fas fa-star" />
-                      </li>
-                      <li className="text-sm ms-1">
-                        <i className="fas fa-star" />
-                      </li>
-                      <li className="text-sm ms-1">
-                        <i className="fas fa-star" />
-                      </li>
-                      <li className="text-sm ms-1">
-                        <i className="fas fa-star" />
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="group min-h-[260px] relative after:absolute after:content-[''] after:left-0 after:top-0 after:w-full after:h-full after:bg-gradient-to-t after:from-black/75 after:to-black/5 after:opacity-0 hover:after:opacity-100 after:transition after:duration-300 after:ease-in-out overflow-hidden">
-                  <img
-                    src="../images/img4.jpeg"
-                    className="w-full h-full object-cover"
-                    alt=""
-                  />
-                  <div className="bg-lion text-white py-2 px-4 flex items-center justify-between absolute bottom-3 left-0 z-10 -translate-x-full group-hover:translate-x-0 transition duration-300 ease-in-out w-4/5">
-                    <span className="font-barlow text-lg font-normal">
-                      Fancy student Room
-                    </span>
-                    <ul className="flex items-center">
-                      <li className="text-sm">
-                        <i className="fas fa-star" />
-                      </li>
-                      <li className="text-sm ms-1">
-                        <i className="fas fa-star" />
-                      </li>
-                      <li className="text-sm ms-1">
-                        <i className="fas fa-star" />
-                      </li>
-                      <li className="text-sm ms-1">
-                        <i className="fas fa-star" />
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="group min-h-[260px] relative after:absolute after:content-[''] after:left-0 after:top-0 after:w-full after:h-full after:bg-gradient-to-t after:from-black/75 after:to-black/5 after:opacity-0 hover:after:opacity-100 after:transition after:duration-300 after:ease-in-out overflow-hidden">
-                  <img
-                    src="../images/img4.jpeg"
-                    className="w-full h-full object-cover"
-                    alt=""
-                  />
-                  <div className="bg-lion text-white py-2 px-4 flex items-center justify-between absolute bottom-3 left-0 z-10 -translate-x-full group-hover:translate-x-0 transition duration-300 ease-in-out w-4/5">
-                    <span className="font-barlow text-lg font-normal">
-                      Fancy student Room
-                    </span>
-                    <ul className="flex items-center">
-                      <li className="text-sm">
-                        <i className="fas fa-star" />
-                      </li>
-                      <li className="text-sm ms-1">
-                        <i className="fas fa-star" />
-                      </li>
-                      <li className="text-sm ms-1">
-                        <i className="fas fa-star" />
-                      </li>
-                      <li className="text-sm ms-1">
-                        <i className="fas fa-star" />
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="group min-h-[260px] relative after:absolute after:content-[''] after:left-0 after:top-0 after:w-full after:h-full after:bg-gradient-to-t after:from-black/75 after:to-black/5 after:opacity-0 hover:after:opacity-100 after:transition after:duration-300 after:ease-in-out overflow-hidden">
-                  <img
-                    src="../images/img4.jpeg"
-                    className="w-full h-full object-cover"
-                    alt=""
-                  />
-                  <div className="bg-lion text-white py-2 px-4 flex items-center justify-between absolute bottom-3 left-0 z-10 -translate-x-full group-hover:translate-x-0 transition duration-300 ease-in-out w-4/5">
-                    <span className="font-barlow text-lg font-normal">
-                      Fancy Students Room
-                    </span>
-                    <ul className="flex items-center">
-                      <li className="text-sm">
-                        <i className="fas fa-star" />
-                      </li>
-                      <li className="text-sm ms-1">
-                        <i className="fas fa-star" />
-                      </li>
-                      <li className="text-sm ms-1">
-                        <i className="fas fa-star" />
-                      </li>
-                      <li className="text-sm ms-1">
-                        <i className="fas fa-star" />
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section className="py-16 px-3 bg-banner-image bg-center bg-cover bg-fixed bg-no-repeat">
-            <div className="container max-w-[1200px] mx-auto">
-              <h2 className="font-gilda font-normal text-3xl sm:text-[46px] tracking-[.04em] text-coyote text-center mb-3">
-                Our Hostel Services
-              </h2>
-              <div className="flex items-center justify-center">
-                <img src="../images/img4.jpeg" alt="" />
-              </div>
-              <div className="grid gap-3 mt-10 sm:grid-cols-2 md:grid-cols-3">
-                <div className="flex text-center flex-col justify-center items-center bg-black/30 p-10 hover:bg-black/50 transition duration-300 ease-in-out">
-                  <img src="../images/img4.jpeg" className="w-[54px]" />
-                  <h4 className="mt-4 mb-2 text-lion font-gilda text-xl tracking-[.04em] font-normal">
-                    Pure water
-                  </h4>
-                  <p className="text-white text-base font-barlow font-light tracking-[.04em]">
-                    Purified water we are providing
-                  </p>
-                </div>
-                <div className="flex text-center flex-col justify-center items-center bg-black/30 p-10 hover:bg-black/50 transition duration-300 ease-in-out">
-                  <img src="../images/img4.jpeg" className="w-[54px]" />
-                  <h4 className="mt-4 mb-2 text-lion font-gilda text-xl tracking-[.04em] font-normal">
-                    {" "}
-                    Cycle Parking Space
-                  </h4>
-                  <p className="text-white text-base font-barlow font-light tracking-[.04em]">
-                    All Student facilities are there
-                  </p>
-                </div>
-                <div className="flex text-center flex-col justify-center items-center bg-black/30 p-10 hover:bg-black/50 transition duration-300 ease-in-out">
-                  <img src="../images/img4.jpeg" className="w-[54px]" />
-                  <h4 className="mt-4 mb-2 text-lion font-gilda text-xl tracking-[.04em] font-normal">
-                    Room Service
-                  </h4>
-                  <p className="text-white text-base font-barlow font-light tracking-[.04em]">
-                    Cleaning is very important
-                  </p>
-                </div>
-                <div className="flex text-center flex-col justify-center items-center bg-black/30 p-10 hover:bg-black/50 transition duration-300 ease-in-out">
-                  <img src="../images/img4.jpeg" className="w-[54px]" />
-                  <h4 className="mt-4 mb-2 text-lion font-gilda text-xl tracking-[.04em] font-normal">
-                    Swimming Pool
-                  </h4>
-                  <p className="text-white text-base font-barlow font-light tracking-[.04em]">
-                    We are providing all service
-                  </p>
-                </div>
-                <div className="flex text-center flex-col justify-center items-center bg-black/30 p-10 hover:bg-black/50 transition duration-300 ease-in-out">
-                  <img src="../images/img4.jpeg" className="w-[54px]" />
-                  <h4 className="mt-4 mb-2 text-lion font-gilda text-xl tracking-[.04em] font-normal">
-                    Fibre Internet
-                  </h4>
-                  <p className="text-white text-base font-barlow font-light tracking-[.04em]">
-                    CEG hostels
-                  </p>
-                </div>
-                <div className="flex text-center flex-col justify-center items-center bg-black/30 p-10 hover:bg-black/50 transition duration-300 ease-in-out">
-                  <img src="../images/img4.jpeg" className="w-[54px]" />
-                  <h4 className="mt-4 mb-2 text-lion font-gilda text-xl tracking-[.04em] font-normal">
-                    Breakfast
-                  </h4>
-                  <p className="text-white text-base font-barlow font-light tracking-[.04em]">
-                    Dicipline Hostels
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-          <footer>
-            <div className="bg-nero py-16 px-3">
-              <div className="grid max-w-[1200px] mx-auto gap-8 text-center md:grid-cols-2 md:text-start lg:grid-cols-footer">
-                <div className="md:me-2 lg:me-3">
-                  <a
-                    href="index.html"
-                    className="text-lion font-gilda font-normal text-2xl tracking-[.04em]"
-                  >
-                    CEG<span className="text-white">Hostels</span>
-                  </a>
-                  <p className="text-white font-light font-barlow text-base mt-3 max-w-[480px] mx-auto md:ms-0">
-                    Staying in hostels can be the biggest adventure of your travels.
-                    Therefore some great memories can be made and relived through these
-                    quotes about hostel life.
-                  </p>
-                </div>
-                <div>
-                  <h4 className="inline-block font-gilda tracking-[.04em] text-lg text-white capitalize relative after:absolute after:content-[''] after:left-0 after:-bottom-0 after:h-[1px] after:w-full after:bg-coyote pb-1 mb-4">
-                    quick link
-                  </h4>
-                  <ul>
-                    <li className="my-2">
-                      <a
-                        href="#"
-                        className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
-                      >
-                        our services
-                      </a>
-                    </li>
-                    <li className="my-2">
-                      <a
-                        href="#"
-                        className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
-                      >
-                        Healthy Food
-                      </a>
-                    </li>
-                    <li className="my-2">
-                      <a
-                        href="#"
-                        className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
-                      >
-                        Hygienic life
-                      </a>
-                    </li>
-                    <li className="my-2">
-                      <a
-                        href="#"
-                        className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
-                      >
-                        Peaceful Environment
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="inline-block font-gilda tracking-[.04em] text-lg text-white capitalize relative after:absolute after:content-[''] after:left-0 after:-bottom-0 after:h-[1px] after:w-full after:bg-coyote pb-1 mb-4">
-                    explore
-                  </h4>
-                  <ul>
-                    <li className="my-2">
-                      <a
-                        href="#"
-                        className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
-                      >
-                        rooms &amp; suites
-                      </a>
-                    </li>
-                    <li className="my-2">
-                      <a
-                        href="#"
-                        className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
-                      >
-                        spa &amp; wellness
-                      </a>
-                    </li>
-                    <li className="my-2">
-                      <a
-                        href="#"
-                        className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
-                      >
-                        special offers
-                      </a>
-                    </li>
-                    <li className="my-2">
-                      <a
-                        href="#"
-                        className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
-                      >
-                        restaurant
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="inline-block font-gilda tracking-[.04em] text-lg text-white capitalize relative after:absolute after:content-[''] after:left-0 after:-bottom-0 after:h-[1px] after:w-full after:bg-coyote pb-1 mb-4">
-                    contact
-                  </h4>
-                  <ul>
-                    <li className="my-2 grid grid-cols-[40px_auto] justify-center md:justify-start">
-                      <span className="text-white">
-                        <i className="fas fa-map-marker-alt" />
-                      </span>
-                      <span className="text-white/50 font-light">
-                        Anna University, Chennai
-                      </span>
-                    </li>
-                    <li className="my-2 grid grid-cols-[40px_auto] justify-center md:justify-start ">
-                      <span className="text-white">
-                        <i className="fas fa-phone" />
-                      </span>
-                      <span className="text-white/50 font-light">0421 4312 3241</span>
-                    </li>
-                    <li className="my-2 grid grid-cols-[40px_auto] justify-center md:justify-start">
-                      <span className="text-white">
-                        <i className="fas fa-envelope" />
-                      </span>
-                      <span className="text-white/50 font-light">
-                        info.ceghostel@mail.com
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="py-4 text-white font-normal font-barlow uppercase text-center tracking-widest bg-nero-dark">
-              <p className="text-sm">© copyright 2023 by NPS Team</p>
-            </div>
-          </footer>
-        </>
-
-      </div>
-    </Transitions>
+          </div>
+          <div className="py-4 text-white font-normal font-barlow uppercase text-center tracking-widest bg-nero-dark">
+            <p className="text-sm">© copyright 2023 by NPS Team</p>
+          </div>
+        </footer>
+      </div >
+    </Transitions >
   )
 }
 

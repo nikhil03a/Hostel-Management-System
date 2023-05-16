@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import ApprovalComponent from '../components/ApprovalComponent'
 import Navbar from '../components/Navbar'
 import SideBar from '../components/SideBar'
+import { FaTachometerAlt, FaKey, FaUserCircle, FaUsersCog, FaBed } from 'react-icons/fa'
+
 
 const AdminApproval = () => {
   const navigate = useNavigate();
@@ -33,45 +35,81 @@ const AdminApproval = () => {
           "Content-Type": "application/json"
         }
       })
-      .then((response) => {
-        return response.json()
-      })
-      .then(data => {
-        setDetails(data);
-      })
-      .catch(error => {
-        window.alert(error);
-        return;
-      })
+        .then((response) => {
+          return response.json()
+        })
+        .then(data => {
+          setDetails(data);
+        })
+        .catch(error => {
+          window.alert(error);
+          return;
+        })
     }
     getDetails();
   }, [])
 
   let renderedItems;
+  const headers = [
+    {
+      label: 'Name',
+      value: (data) => data.name
+    }, {
+      label: "Gender",
+      value: (data) => data.gender
+    },
+    {
+      label: 'E-mail',
+      value: (data) => data.email
+    },
+    {
+      label: 'Mobile',
+      value: (data) => data.mobile
+    }, {
+      label: "Blood Group",
+      value: (data) => data.bloodgroup
+    }, {
+      label: "College Name",
+      value: (data) => data.clgname
+    },
+    {
+      label: "Hostel",
+      value: (data) => data.hostel
+    }
+    , {
+      label: "Address",
+      value: (data) => data.address
+    },
+    {
+      label: "City",
+      value: (data) => data.city
+    }
 
+  ];
   if (details.message !== "Nothing") {
     renderedItems = details.map((detail) => {
-      return <ApprovalComponent detail={detail} />
+      return <ApprovalComponent data={detail} headers={headers} />
     })
   } else {
-    renderedItems = (<div className='flex-1 mt-4'>Nothing to Approve....</div>)
+    renderedItems = (<div className='flex-1 text-green-600 font-serif tracking-widest m-10 font-bold text-2xl'>Everything up to date...</div>)
   }
-
   return (
     <div className='relative'>
       <Navbar />
       <div className='flex space-x-10'>
         <div>
           <SideBar user="Admin" links={[
-            { label: "DashBoard", path: '/admin' },
-            { label: "Authenticate Warden", path: "/admin/approval" },
-            { label: "View Warden Details", path: "/admin/view-warden" },
-            { label: "Enable Room Allocation", path: "/admin/enable-room" },
-            { label: "View Student Details", path: '/admin/view-student' }
+            { label: "DashBoard", path: '/admin', icon: FaTachometerAlt },
+            { label: "Authenticate Warden", path: "/admin/approval", icon: FaKey },
+            { label: "View Warden Details", path: "/admin/view-warden", icon: FaUserCircle },
+            { label: "Enable Room Allocation", path: "/admin/enable-room", icon: FaBed },
+            { label: "View Student Details", path: '/admin/view-student', icon: FaUsersCog }
           ]} /></div>
-          <div>{renderedItems}</div>
-          
-        
+        <div className='grid grid-cols-1'>
+          {renderedItems}
+        </div>
+
+
       </div>
     </div>
   )

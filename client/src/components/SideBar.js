@@ -26,7 +26,7 @@ const SideBar = ({ user, links }) => {
   })
 
   return (
-    <section className="flex gap-6">
+    <section className="flex gap-6 min-h-full">
       <div
         className={`bg-[#0e0e0e] min-h-screen ${open ? "w-72" : "w-16"
           } duration-500 text-gray-100 px-4`}

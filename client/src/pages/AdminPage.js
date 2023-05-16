@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import SideBar from '../components/SideBar'
 import Navbar from '../components/Navbar'
+import {FaTachometerAlt,FaKey,FaUserCircle,FaUsersCog,FaBed} from 'react-icons/fa'
 const AdminPage = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -25,11 +26,11 @@ const AdminPage = () => {
       <div className='flex'>
         <div>
           <SideBar user="Admin" links={[
-            { label: "DashBoard", path: '/admin' },
-            { label: "Authenticate Warden", path: "/admin/approval" },
-            { label: "View Warden Details", path: "/admin/view-warden" },
-            { label: "Enable Room Allocation", path: "/admin/enable-room" },
-            { label: "View Student Details", path: '/admin/view-student' }
+            { label: "DashBoard", path: '/admin',icon:FaTachometerAlt },
+            { label: "Authenticate Warden", path: "/admin/approval",icon:FaKey },
+            { label: "View Warden Details", path: "/admin/view-warden",icon: FaUserCircle },
+            { label: "Enable Room Allocation", path: "/admin/enable-room", icon: FaBed },
+            { label: "View Student Details", path: '/admin/view-student', icon: FaUsersCog }
           ]} />
         </div>
         <div className="min-h-screen bg-gray-100 py-4 flex flex-col justify-center sm:py-12">

@@ -44,9 +44,49 @@ const WardenApproval = () => {
         getDetails();
     }, [])
     var renderedItems;
+    const headers = [
+        {
+            label: 'Name',
+            value: (data) => data.name
+        },{
+          label:"Gender",
+          value: (data) => data.gender
+        },
+        {
+            label: 'E-mail',
+            value: (data) => data.email
+        },
+        {
+            label: 'Mobile',
+            value: (data) => data.mobile
+        },{
+          label:"Blood Group",
+          value: (data) => data.bloodgroup
+        },{
+          label:"College Name",
+          value: (data) => data.clgname
+        },
+        {
+            label: "Degree",
+            value: (data) => data.deg
+        },
+        {
+            label: "Roll No",
+            value: (data) => data.rno
+        }
+        ,{
+          label:"Address",
+          value: (data) => data.address
+        },
+        {
+          label:"City",
+          value: (data) => data.city
+        }
+    
+    ];
     if (details.message !== "Nothing") {
         renderedItems = details.map((detail) => {
-            return <ApprovalComponent detail={detail} />
+            return <ApprovalComponent data={detail} headers={headers} />
         })
     } else {
         renderedItems = (<div className='flex-1 text-green-600 font-serif tracking-widest m-10 font-bold text-2xl'>Everything up to date...</div>)
@@ -62,7 +102,7 @@ const WardenApproval = () => {
                     { label: "Mark Attendance", path: '/warden/attendance/' + localStorage.getItem('id'), icon: FaCheckSquare },
                     { label: "Update Mess Bill", path: '/warden/mess/' + localStorage.getItem('id'), icon: FaCalculator }]} />
                 </div>
-                <div>
+                <div className='grid grid-cols-1'>
                     {renderedItems}
                 </div>
             </div>

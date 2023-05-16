@@ -44,48 +44,60 @@ const WardenPage = () => {
     };
     getDetails();
   }, [])
-  const headers = [
+  const headers1 = [
     {
-        label: 'Name',
-        value: (data) => data.name
-    },{
-      label:"Gender",
+      label: 'Name',
+      value: (data) => data.name
+    }, {
+      label: "Gender",
       value: (data) => data.gender
     },
     {
-        label: 'E-mail',
-        value: (data) => data.email
+      label: 'E-mail',
+      value: (data) => data.email
     },
-    {
-        label: 'Mobile',
-        value: (data) => data.mobile
-    },{
-      label:"Blood Group",
-      value: (data) => data.bloodgroup
-    },{
-      label:"College Name",
+     {
+      label: "College Name",
       value: (data) => data.clgname
     },
     {
-        label: "Hostel",
-        value: (data) => data.hostel
+      label: "Hostel",
+      value: (data) => data.hostel
     },
     {
-        label: "Department",
-        value: (data) => data.dept
+      label: "Department",
+      value: (data) => data.dept
     }
-    ,{
-      label:"Degree",
+    , {
+      label: "Degree",
       value: (data) => data.degree
     },
     {
-      label:"Area of Research",
+      label: "Area of Research",
       value: (data) => data.aoresearch
-    }
+    },{
+      label: 'Mobile',
+      value: (data) => data.mobile
+    }, {
+      label: "Blood Group",
+      value: (data) => data.bloodgroup
+    },{
+      label: "Address",
+      value: (data) => data.address
+    },{
+      label: "City",
+      value: (data) => data.city
+    },{
+      label: "Pin Code",
+      value: (data) => data.pcode
+    },{
+      label: "Blood Group",
+      value: (data) => data.bloodgroup
+    },
 
-];
+  ];
   return (
-    <Transitions className='relative'>
+    <Transitions>
       <Navbar />
       <div className=''>
         <div className='flex space-x-10'>
@@ -98,11 +110,10 @@ const WardenPage = () => {
           </div>
           <div>
             <div className='uppercase font-mono text-3xl p-5 font-bold'>DashBoard</div>
-            <div className='flex items-center justify-between'>
-            <DashBoard data={data} headers={headers}/>
-            <DashBoard data={data} headers={headers}/>
+            <div className='flex flex-wrap'>
+              <DashBoard data={data} headers={headers1} />
             </div>
-            
+
           </div>
         </div>
 

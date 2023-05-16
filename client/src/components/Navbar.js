@@ -9,7 +9,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="bg-cyan-600 py-3">
+        <nav className="bg-cyan-600 py-3 min-w-full">
             <div className="container mx-auto flex justify-between items-center">
                 <h1 className="text-white text-xl font-bold tracking-widest">CEG Hostels</h1>
                 <ul className="flex space-x-4">
