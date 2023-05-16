@@ -2,6 +2,8 @@ import Navbar from '../components/Navbar';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import SideBar from '../components/SideBar';
+import {FaTachometerAlt,FaBed,FaUserCheck, FaFileInvoice ,FaMinusCircle} from 'react-icons/fa'
+
 import swal from 'sweetalert';
 const ViewMessBill = () => {
   const navigate = useNavigate();
@@ -34,15 +36,15 @@ const ViewMessBill = () => {
       <Navbar />
       <div className='flex space-x-10'>
         <div><SideBar links={[
-          { label: "Dashboard", path: "/student/" + localStorage.getItem("id") },
-          { label: "Room Allocation", path: "/student/room/" + localStorage.getItem("id") },
-          { label: "View Attendance", path: "/student/attendance/" + localStorage.getItem('id') },
-          { label: "View Mess Bill", path: "/student/messbill/" + localStorage.getItem('id') },
-          { label: 'Apply for Mess Reduction', path: '/student/reduction/' + localStorage.getItem('id') }]} /></div>
+          { label: "Dashboard", path: "/student/"+localStorage.getItem("id") , icon: FaTachometerAlt},
+          { label: "Room Allocation", path: "/student/room/"+localStorage.getItem("id"),icon: FaBed },
+          {label:"View Attendance",path:"/student/attendance/"+localStorage.getItem('id'), icon: FaUserCheck},
+          {label:"View Mess Bill", path:"/student/messbill/"+localStorage.getItem('id'),icon: FaFileInvoice},
+          {label:'Apply for Mess Reduction',path:'/student/reduction/'+localStorage.getItem('id'), icon: FaMinusCircle}]  }/></div>
         <div>
           <table>
             <th>
-              <td className='col-span-2 text-2xl uppercase text-center text-gray-500'>Update Mess Bill</td>
+              <td className='col-span-2 text-2xl uppercase text-center text-gray-500'>View Mess Bill</td>
             </th>
             <tr>
               <td><label className="block text-blueGray-600 text-sm font-bold mb-2">Select Month: </label></td>
@@ -64,7 +66,7 @@ const ViewMessBill = () => {
             </tr>
             <tr>
               <td>
-                <label className="block  text-blueGray-600 text-sm font-bold mb-2">Year: </label>
+                <label className="block text-blueGray-600 text-sm font-bold mb-2">Year: </label>
               </td>
               <td>
                 <select name='year' className='border border-gray-400 rounded-lg px-6 py-2 min-w-full' onChange={handleChange}>

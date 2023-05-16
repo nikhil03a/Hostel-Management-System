@@ -2,6 +2,8 @@ import Navbar from '../components/Navbar';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import SideBar from '../components/SideBar';
+import { FaTachometerAlt, FaBed, FaUserCheck, FaFileInvoice, FaMinusCircle } from 'react-icons/fa'
+
 import swal from 'sweetalert';
 const StudentRoom = () => {
     const [isAlloted, setIsAlloted] = useState(false);
@@ -121,59 +123,58 @@ const StudentRoom = () => {
             <div className='flex space-x-10'>
                 <div>
                     <SideBar links={[
-                        { label: "Dashboard", path: "/student/" + localStorage.getItem("id") },
-                        { label: "Room Allocation", path: "/student/room/" + localStorage.getItem("id") },
-                        { label: "View Attendance", path: "/student/attendance/" + localStorage.getItem('id') },
-                        { label: "View Mess Bill", path: "/student/messbill/" + localStorage.getItem('id') },
-                        { label: 'Apply for Mess Reduction', path: '/student/reduction/' + localStorage.getItem('id') }]} />
-                </div>
-                <div>
-                    {isAlloted ?
-                        <div>
-                            Your Room Details
-                            Hostel: {data.hostel}
-                            Room: {data.room}
-                        </div> : isEnable ?
-                            <div>
-                                <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
-                                    <div className="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-xl">
-                                        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                                            Select Hostel and Room
-                                        </h2>
-                                        <form className='mt-6'>
-                                            <div className='mb-2'>
-                                                <label className='block text-sm font-semibold text-gray-800'>Hostel</label>
-                                                <select name="hostel" value={data.hostel} onChange={handleChange} className='block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40' required>
-                                                    <option value={null} selected>Select Hostel</option>
-                                                    <option value={data.hostel}>{data.hostel}</option>
-                                                </select>
-                                            </div>
-                                            <div>
-                                                <label className='block text-sm font-semibold text-gray-800'>Room No. </label>
-                                                <select name="room" value={data.room} onChange={handleChange} className='block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40' required >
-                                                    <option value={null} selected>Select Room</option>
-                                                    <option value='1'>1</option>
-                                                    <option value='2'>2</option>
-                                                    <option value='3'>3</option>
-                                                    <option value='4'>4</option>
-                                                    <option value='5'>5</option>
-                                                </select>
-                                            </div>
-                                            {error &&
-                                                <div className='text-red-500 font-serif'>
-                                                    {error}
-                                                </div>}
-                                            <div className='mt-6'>
-                                                <input type="submit" value="Submit" onClick={handleSubmit} className='w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600'></input>
-                                            </div>
-                                        </form>
+                        { label: "Dashboard", path: "/student/" + localStorage.getItem("id"), icon: FaTachometerAlt },
+                        { label: "Room Allocation", path: "/student/room/" + localStorage.getItem("id"), icon: FaBed },
+                        { label: "View Attendance", path: "/student/attendance/" + localStorage.getItem('id'), icon: FaUserCheck },
+                        { label: "View Mess Bill", path: "/student/messbill/" + localStorage.getItem('id'), icon: FaFileInvoice },
+                        { label: 'Apply for Mess Reduction', path: '/student/reduction/' + localStorage.getItem('id'), icon: FaMinusCircle }]} /></div>
+                    <div>
+                        {isAlloted ?
+                            <div className="items-center justify-between mb-4 mr-6  bg-gray-100 rounded p-12 shadow-lg mt-20 ml-20">
+                                <div className='font-bold text-3xl uppercase'>Your Room Details</div><br></br><br></br>
+                                <div className='flex justify-between'><div className='font-semibold text-gray-800 px-6 text-xl'>Hostel:</div><div className='uppercase'> {data.hostel}</div></div><br></br>
+                                <div className='flex justify-between'><div className='font-semibold text-gray-800 px-6 text-xl'>Room:</div><div> {data.room}</div></div>
+                            </div> : isEnable ?
+                                <div>
+                                    <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
+                                        <div className="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-xl">
+                                            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                                                Select Hostel and Room
+                                            </h2>
+                                            <form className='mt-6'>
+                                                <div className='mb-2'>
+                                                    <label className='block text-sm font-semibold text-gray-800'>Hostel</label>
+                                                    <select name="hostel" value={data.hostel} onChange={handleChange} className='block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40' required>
+                                                        <option value={null} selected>Select Hostel</option>
+                                                        <option value={data.hostel}>{data.hostel}</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label className='block text-sm font-semibold text-gray-800'>Room No. </label>
+                                                    <select name="room" value={data.room} onChange={handleChange} className='block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40' required >
+                                                        <option value={null} selected>Select Room</option>
+                                                        <option value='1'>1</option>
+                                                        <option value='2'>2</option>
+                                                        <option value='3'>3</option>
+                                                        <option value='4'>4</option>
+                                                        <option value='5'>5</option>
+                                                    </select>
+                                                </div>
+                                                {error &&
+                                                    <div className='text-red-500 font-serif'>
+                                                        {error}
+                                                    </div>}
+                                                <div className='mt-6'>
+                                                    <input type="submit" value="Submit" onClick={handleSubmit} className='w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600'></input>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                            </div> : "The Process is Closed"
-                    }
+                                </div> : "The Process is Closed"
+                        }
+                    </div>
                 </div>
             </div>
-        </div>
     )
 }
 

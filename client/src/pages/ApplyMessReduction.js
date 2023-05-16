@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import SideBar from '../components/SideBar';
 import swal from 'sweetalert';
+import {FaTachometerAlt,FaBed,FaUserCheck, FaFileInvoice ,FaMinusCircle} from 'react-icons/fa'
+
 const ApplyMessReduction = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -83,17 +85,39 @@ const ApplyMessReduction = () => {
       <Navbar />
       <div className='flex space-x-10'>
         <div><SideBar links={[
-          { label: "Dashboard", path: "/student/" + localStorage.getItem("id") },
-          { label: "Room Allocation", path: "/student/room/" + localStorage.getItem("id") },
-          { label: "View Attendance", path: "/student/attendance/" + localStorage.getItem('id') },
-          { label: "View Mess Bill", path: "/student/messbill/" + localStorage.getItem('id') },
-          { label: 'Apply for Mess Reduction', path: '/student/reduction/' + localStorage.getItem('id') }]} />
+          { label: "Dashboard", path: "/student/"+localStorage.getItem("id") , icon: FaTachometerAlt},
+          { label: "Room Allocation", path: "/student/room/"+localStorage.getItem("id"),icon: FaBed },
+          {label:"View Attendance",path:"/student/attendance/"+localStorage.getItem('id'), icon: FaUserCheck},
+          {label:"View Mess Bill", path:"/student/messbill/"+localStorage.getItem('id'),icon: FaFileInvoice},
+          {label:'Apply for Mess Reduction',path:'/student/reduction/'+localStorage.getItem('id'), icon: FaMinusCircle}]  }/>
         </div>
         <div>
-          <h3>Apply for Mess Reduction</h3><br></br><br></br>
-          <label>From:</label><input type='date' value={data.from} name='from' min={minDate} max={maxDate} onChange={handleChange}></input><br></br><br></br>
-          <label>To: </label><input type='date' value={data.to} name='to' min={minDate} max={maxDate} onChange={handleChange}></input><br></br><br></br>
-          <button onClick={handleSubmit}>Submit</button>
+          <table>
+            <th>
+              <td className='col-span-2 text-2xl uppercase text-center text-gray-500'>Apply for Mess Reduction</td>
+            </th>
+            <tr>
+              <td>
+              <label className="block  text-blueGray-600 text-sm font-bold mb-2">From:</label>
+              </td>
+              <td>
+              <input className='border border-gray-400 rounded-lg px-6 py-2 min-w-full' type='date' value={data.from} name='from' min={minDate} max={maxDate} onChange={handleChange}></input>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <label className="block  text-blueGray-600 text-sm font-bold mb-2">To: </label>
+              </td>
+              <td>
+              <input className='border border-gray-400 rounded-lg px-6 py-2 min-w-full' type='date' value={data.to} name='to' min={minDate} max={maxDate} onChange={handleChange}></input>
+              </td>
+            </tr>
+            <tr>
+              <td className='col-span-2 text-center'>
+              <button className='bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow' onClick={handleSubmit}>Submit</button>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>

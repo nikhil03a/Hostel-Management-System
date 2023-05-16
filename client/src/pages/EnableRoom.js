@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar'
 import SideBar from '../components/SideBar'
 import { useNavigate } from 'react-router-dom'
 import {FaTachometerAlt,FaKey,FaUserCircle,FaUsersCog,FaBed} from 'react-icons/fa'
-
+import swal from 'sweetalert'
 const EnableRoom = () => {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -44,6 +44,8 @@ const EnableRoom = () => {
         checkIfEnabled();
     }, [isEnable])
     const handleClick = async () => {
+        if(isEnable) swal("Disabled Successfully","","success")
+                else swal("Enabled Successfully","","success")
         await fetch("http://localhost:8800/admin/room-enable", {
             method: 'POST',
             body: JSON.stringify({
@@ -57,6 +59,7 @@ const EnableRoom = () => {
         }).then(data => {
             const message = data.message
             if (message === 'SUCCESS') {
+                
                 setIsEnabled(!isEnable);
             } else {
                 setIsEnabled(!isEnable);
@@ -79,9 +82,9 @@ const EnableRoom = () => {
             { label: "View Student Details", path: '/admin/view-student', icon: FaUsersCog }
           ]} />
                 </div>
-                <div className='mt-5'>
-                    {isEnable ? <div className='uppercase font-gilda font-bold'> Room allocation process is currently enabled. Click below to disable</div> :
-                        <div className='uppercase font-gilda font-bold'>Room allocation process is currently disabled. Click below to enable</div>}
+                <div className='mt-20'>
+                    {isEnable ? <div className='uppercase font-gilda font-bold shadow-lg p-8'> Room allocation process is currently enabled. Click below to disable</div> :
+                        <div className='uppercase shadow-lg p-8 font-gilda font-bold'>Room allocation process is currently disabled. Click below to enable</div>}
                     <br></br>
                     <button onClick={handleClick} className='cursor-pointer border p-2 bg-slate-100 rounded border-dashed hover:bg-slate-200'>Enable / Disable</button>
                 </div>

@@ -6,8 +6,8 @@ import SwimmingPool from './images/swimmingpool.jpg'
 import Badminton from './images/badminton.jpg'
 import Internet from './images/internet.jpg'
 import Parking from './images/parking.jpg'
-import RoomService from './images/roomservice.jpg'
-import Water from './images/water.jpg'
+// import RoomService from './images/roomservice.jpg'
+// import Water from './images/water.jpg'
 import Pic1 from './images/pic1.jpg'
 import Pic2 from './images/pic2.jpg'
 import HostelDay from './images/hostelday.jpg'
@@ -16,7 +16,7 @@ import SportsDay from './images/sportsday.jpg'
 import Pic4 from './images/pic4.jpg'
 import MovieNight from './images/movienight.jpg'
 import Pic5 from './images/pic5.jpg'
-
+import Logo from './images/23494797.jpg'
 import Pic6 from './images/pic6.jpg'
 
 
@@ -52,10 +52,10 @@ const HomePage = () => {
       image: Parking,
       content: "Cycle Parking Areas"
     },{
-      image: Water,
+      // image: Water,
       content: "RO Drinking Water"
     },{
-      image: RoomService,
+      // image: RoomService,
       content: "Room Service"
     }
   ]
@@ -69,7 +69,7 @@ const HomePage = () => {
         <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
           <div class="max-w-screen-xl flex flex-wrap items-center justify-between mr-10 p-4">
             <a href="#" class="flex items-center">
-              <img src="" class="h-8 mr-3" alt="Flowbite Logo" />
+              <img src={Logo} class="h-8 mr-3" alt="Flowbite Logo" />
               <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">CEG Hostels</span>
             </a>
             <button data-collapse-toggle="navbar-dropdown" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-dropdown" aria-expanded="false">
@@ -79,16 +79,16 @@ const HomePage = () => {
             <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
               <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <li>
-                  <a href="#" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">Home</a>
+                  <a href="#" class="block py-2 pl-3 pr-4 text-white bg-gray-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">Home</a>
                 </li>
                 <li>
-                  <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Events</a>
+                  <a href="#events" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Events</a>
                 </li>
                 <li>
-                  <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Gallery</a>
+                  <a href="#gallery" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Gallery</a>
                 </li>
                 <li>
-                  <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Amenities</a>
+                  <a href="#amenities" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Amenities</a>
                 </li>
                 <li>
                   <button id="dropdownNavbarLink" onClick={toggleDropdown} data-dropdown-toggle="dropdownNavbar" class="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Login <svg class="w-5 h-5 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></button>
@@ -113,7 +113,7 @@ const HomePage = () => {
           </div>
         </nav>
 
-        <section className="bg-white min-h-[640px] mx-auto px-3 flex items-center py-16 mt-0">
+        <section className="bg-white min-h-[640px] mx-auto px-3 flex items-center py-16 mt-0 bg-center h-screen bg-cover" style={ {backgroundImage : "url('./pages/images/main.jpg')"}}>
           <div className="container max-w-[1200px] mx-auto grid md:grid-cols-2 gap-14">
             <div className="flex flex-col justify-center items-start">
               <h3 className="text-coyote font-normal opacity-70 tracking-[.25em] font-barlow-cond text-xl sm:text-[22px] uppercase">
@@ -129,7 +129,7 @@ const HomePage = () => {
             </div>
           </div>
         </section>
-        <section className="py-16 px-3 bg-white">
+        <section className="py-16 px-3 bg-white" id='events'>
           <div className="container max-w-[1200px] mx-auto">
             <h2 className="font-gilda font-normal text-3xl sm:text-[46px] tracking-[.04em] text-coyote text-center mb-3">
               Events
@@ -207,7 +207,7 @@ const HomePage = () => {
             </div>
           </div>
         </section>
-        <section className="py-16 px-3 bg-light-gray">
+        <section className="py-16 px-3 bg-light-gray" id='gallery'>
           <div className="container max-w-[1200px] mx-auto">
             <h2 className="font-gilda font-normal text-3xl text-[46px] tracking-[.04em] text-coyote text-center mb-3">
               Gallery
@@ -296,10 +296,10 @@ const HomePage = () => {
             </div>
           </div>
         </section>
-        <section className="py-16 px-3 bg-banner-image bg-center bg-cover bg-fixed bg-no-repeat">
+        <section className="py-16 px-3 bg-banner-image bg-center bg-cover bg-fixed bg-no-repeat" id='amenities'>
           <div className="container max-w-[1200px] mx-auto">
             <h2 className="font-gilda font-normal text-3xl sm:text-[46px] tracking-[.04em] text-coyote text-center mb-3">
-              Our Hostel Services
+             Amenities Available
             </h2>
             <div className="flex items-center justify-center">
               <img src="../images/img4.jpeg" alt="" />
@@ -347,7 +347,7 @@ const HomePage = () => {
                       href="#"
                       className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
                     >
-                     Safe Environment
+                     Safe and secure hostels
                     </a>
                   </li>
                   <li className="my-2">
@@ -376,33 +376,77 @@ const HomePage = () => {
                   </li>
                 </ul>
               </div>
-              
+              <div>
+                <h4 className="inline-block font-gilda tracking-[.04em] text-lg text-white capitalize relative after:absolute after:content-[''] after:left-0 after:-bottom-0 after:h-[1px] after:w-full after:bg-coyote pb-1 mb-4">
+                our services
+                </h4>
+                <ul>
+                  <li className="my-2">
+                    <a
+                      href="#"
+                      className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
+                    >
+                     Safe and secure hostels
+                    </a>
+                  </li>
+                  <li className="my-2">
+                    <a
+                      href="#"
+                      className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
+                    >
+                      Healthy Food
+                    </a>
+                  </li>
+                  <li className="my-2">
+                    <a
+                      href="#"
+                      className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
+                    >
+                      Hygienic Rooms
+                    </a>
+                  </li>
+                  <li className="my-2">
+                    <a
+                      href="#"
+                      className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
+                    >
+                      Peaceful Environment
+                    </a>
+                  </li>
+                </ul>
+              </div>
               <div>
                 <h4 className="inline-block font-gilda tracking-[.04em] text-lg text-white capitalize relative after:absolute after:content-[''] after:left-0 after:-bottom-0 after:h-[1px] after:w-full after:bg-coyote pb-1 mb-4">
                   contact
                 </h4>
                 <ul>
-                  <li className="my-2 grid grid-cols-[40px_auto] justify-center md:justify-start">
-                    <span className="text-white">
-                      <i className="fas fa-map-marker-alt" />
-                    </span>
-                    <span className="text-white/50 font-light">
-                      Anna University, Chennai
-                    </span>
+                  <li className="my-2">
+                    <a
+                      className="capitalize font-barlow font-light text-base text-white/50 transition duration-300 ease-in-out "
+                    >
+                     CEG Hostel Office,
+                    </a>
                   </li>
-                  <li className="my-2 grid grid-cols-[40px_auto] justify-center md:justify-start ">
-                    <span className="text-white">
-                      <i className="fas fa-phone" />
-                    </span>
-                    <span className="text-white/50 font-light">0421 4312 3241</span>
+                  <li className="my-2">
+                    <a
+                      className="capitalize font-barlow font-light text-base text-white/50 transition duration-300 ease-in-out"
+                    >
+                      College of Engineering Guindy,
+                    </a>
                   </li>
-                  <li className="my-2 grid grid-cols-[40px_auto] justify-center md:justify-start">
-                    <span className="text-white">
-                      <i className="fas fa-envelope" />
-                    </span>
-                    <span className="text-white/50 font-light">
-                      info.ceghostel@mail.com
-                    </span>
+                  <li className="my-2">
+                    <a
+                      className="capitalize font-barlow font-light text-base text-white/50 transition duration-300 ease-in-out"
+                    >
+                      Anna University, Chennai-25.
+                    </a>
+                  </li>
+                  <li className="my-2">
+                    <a
+                      className="capitalize font-barlow font-light text-bas text-white/50 transition duration-300 ease-in-out"
+                    >
+                      Phone: 044-2235-7711
+                    </a>
                   </li>
                 </ul>
               </div>

@@ -31,9 +31,9 @@ const ViewWarden = () => {
         e.preventDefault();
     }
     return (
-        <div className='relative'>
+        <div>
             <Navbar />
-            <div className='flex space-x-10'>
+            <div className='flex'>
                 <div><SideBar user="Admin" links={[
                     { label: "DashBoard", path: '/admin', icon: FaTachometerAlt },
                     { label: "Authenticate Warden", path: "/admin/approval", icon: FaKey },
@@ -42,36 +42,27 @@ const ViewWarden = () => {
                     { label: "View Student Details", path: '/admin/view-student', icon: FaUsersCog }
                 ]} />
                 </div>
-                <table >
-                    <thead>
+                <div>
+                    <table>
+                        <th>
+                            <td className='col-span-2 text-2xl uppercase text-center text-gray-500'>View Warden</td>
+                        </th>
                         <tr>
-                            <th className="py-2 text-2xl uppercase text-center text-gray-500" colSpan="2">
-                                View Warden Details:
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <label className="block text-blueGray-600 text-sm font-bold mb-2">Select Hostel:</label>
-                            </td>
-                            <td>
-                                <select name="hostel" className="border border-gray-400 rounded-lg px-4 py-2 w-full" onChange={handleChange}>
-                                    <option disabled>Select</option>
-                                    <option value="kurinji">Kurinji</option>
-                                    <option value="mullai">Mullai</option>
-                                </select>
-                            </td>
+                            <td><label className="block text-blueGray-600 text-sm font-bold mb-2">Select Hostel : </label></td>
+                            <td><select name='hostel' className='border border-gray-400 rounded-lg px-6 py-2 min-w-full' onChange={handleChange}>
+                                <option selected disabled>Select </option>
+                                <option value='kurinji'>Kurinji</option>
+                                <option value='mullai'>Mullai</option>
+                            </select></td>
                         </tr>
                         <tr>
-                            <td colSpan="2" className="text-center">
-                                <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" onClick={handleSubmit}>
-                                    View
-                                </button>
+                            <td className='col-span-2 text-center'>
+                                <button className='bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow' onClick={handleSubmit}>Submit</button>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
+                    </table>
+                </div>
+
 
             </div>
         </div>

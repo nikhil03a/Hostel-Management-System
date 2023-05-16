@@ -91,7 +91,7 @@ const AdminApproval = () => {
       return <ApprovalComponent data={detail} headers={headers} />
     })
   } else {
-    renderedItems = (<div className='flex-1 text-green-600 font-serif tracking-widest m-10 font-bold text-2xl'>Everything up to date...</div>)
+    renderedItems = (<div className='flex-1 text-green-600 font-serif shadow-lg p-8 tracking-widest m-10 font-bold text-2xl'>Everything up to date...</div>)
   }
   return (
     <div className='relative'>
@@ -105,7 +105,7 @@ const AdminApproval = () => {
             { label: "Enable Room Allocation", path: "/admin/enable-room", icon: FaBed },
             { label: "View Student Details", path: '/admin/view-student', icon: FaUsersCog }
           ]} /></div>
-        <div className='grid grid-cols-1'>
+        <div className=''>
           {renderedItems}
         </div>
 

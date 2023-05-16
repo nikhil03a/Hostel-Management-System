@@ -21,7 +21,7 @@ const WardenPage = () => {
   useEffect(() => {
     checkUserToken();
   }, [isLoggedIn])
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
   useEffect(() => {
     const getDetails = async () => {
       await fetch("http://localhost:8800/warden/dashboard/" + localStorage.getItem('id'), {

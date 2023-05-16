@@ -93,11 +93,11 @@ const WardenRegForm = () => {
 
 
   return (
-    <div>
+    <div className='bg-purple-100'>
       <section className=" py-1 bg-blueGray-50">
         <div className="w-full lg:w-8/12 px-4 mx-auto mt-6">
           <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
-            <div className="rounded-t bg-white mb-0 px-6 py-6">
+            <div className="rounded-t text-white mb-0 px-6 py-6 bg-purple-800">
               <div className="text-center flex justify-between">
                 <h6 className="text-blueGray-700 text-xl font-bold">Register as Warden</h6>
               </div>
@@ -394,7 +394,10 @@ const WardenRegForm = () => {
                 </div>
               </form>
             </div>
-            <button onClick={handleSubmit}>Submit</button>
+            <div className='mx-10'>
+            <button className='w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600' onClick={handleSubmit}>Submit</button>
+
+            </div>
             <br>
             </br>
           </div>

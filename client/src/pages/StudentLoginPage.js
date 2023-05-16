@@ -75,7 +75,7 @@ const StudentLoginPage = () => {
               <div className='text-red-500 font-serif'>
                 {error}
               </div>}
-            <div>Not registered yet.. <Link to='/student-register'>Click here</Link> to register.</div>
+            <div>Haven't registed yet? <Link to='/student-register'className='text-blue-800 underline'>Click here</Link> to register.</div>
             <div className='mt-6'>
               <input type="submit" value="Submit" onClick={handleSubmit} className='w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600'></input>
             </div>
