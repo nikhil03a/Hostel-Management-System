@@ -33,3 +33,12 @@
   ::-webkit-calendar-picker-indicator {
     filter: invert(1);
   }
+td{
+  padding: 15px;
+}
+table{
+  margin-top: 25px;
+}
+td{
+
+}

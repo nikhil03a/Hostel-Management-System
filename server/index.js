@@ -201,6 +201,20 @@ app.post('/warden/students/:id', async (req, res) => {
         })
     })
 })
+app.get('/warden/view-students/:id', async (req, res) => {
+    let hostel;
+    db.query("select hostel from warden where id = ?", [req.params.id], (err, data) => {
+        hostel = data[0].hostel;
+        db.query("select * from student join hostelstudent join hostelvacancy on student.id=hostelstudent.studentid and hostelstudent.roomid=hostelvacancy.id where student.hostel=?", [hostel], (err, data) => {
+            res.json(data);
+        })
+    })
+})
+app.get('/warden/dashboard/:id',async (req,res)=>{
+    db.query("select * from warden where id=?",[req.params.id],(err,data)=>{
+        res.json(data);
+    })
+})
 app.post('/warden/attendance/:id', async (req, res) => {
     const arr = req.body.arr;
     let count = 0;
@@ -271,7 +285,7 @@ app.post('/warden/mess/:id', async (req, res) => {
                     db.query("select sum(days) as reductionDays from reduction join student on student.id=reduction.studid where student.hostel=? and MONTH(`from`)=?", [hostel, month], (err, data) => {
                         const reductionDays = data[0].reductionDays || 0;
                         const finalDays = totalDaysResided - reductionDays;
-                        db.query( "insert into messbill (hostel,month,year,amount,days) values (?,?,?,?,?)", [hostel, month, year, amount, finalDays] ,(err, data) => {
+                        db.query("insert into messbill (hostel,month,year,amount,days) values (?,?,?,?,?)", [hostel, month, year, amount, finalDays], (err, data) => {
                             res.json({ message: "SUCCESS" });
                         });
                     });

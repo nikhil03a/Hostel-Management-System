@@ -1,17 +1,13 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import GoogleMapReact from 'google-map-react'
+import Transitions from '../components/Transitions'
 const HomePage = () => {
   useEffect(() => {
     localStorage.clear();
   })
-  const location = {
-    address: 'CEG Hostel Office',
-    lat: 13.014056, 
-    lng: 80.238865,
-  }
   return (
-    <div>
+    <Transitions>
       <Link to='/admin-login'>Admin Login</Link><br></br>
       <Link to='/warden-login'>Warden Login</Link><br></br>
       <Link to='/student-login'>Student Login</Link><br></br>
@@ -59,13 +55,13 @@ const HomePage = () => {
             referrerPolicy="no-referrer"
           />
           <link rel="stylesheet" href="../dist/main.css" />
-          <nav className="py-5 md:flex md:justify-between bg-nero">
+          <nav className=" md:flex md:justify-between bg-gray-800 py-4">
             <div className="flex justify-between">
               <a
                 href="#"
-                className="font-gilda text-[28px] font-normal text-lion"
+                className="font-gilda text-[28px] font-normal text-lion ml-5"
               >
-                Ander<span className="text-white">Matt.</span>
+                CEG  <span className="text-white">Hostels</span>
               </a>
               <button
                 type="button"
@@ -125,12 +121,7 @@ const HomePage = () => {
                   </a>
                 </li>
               </ul>
-              <a
-                href="#"
-                className="w-full h-[42px] px-7 uppercase flex items-center justify-center bg-lion tracking-widest font-medium text-white mt-4 hover:bg-lion-dark md:mt-0 md:min-w-[140px] ms-6"
-              >
-                know more
-              </a>
+
             </div>
           </nav>
           <section className="bg-nero min-h-[640px] mx-auto px-3 flex items-center py-16 mt-0">
@@ -166,14 +157,14 @@ const HomePage = () => {
                 <div className="h-[425px]">
                   <img
                     className="w-full h-full object-cover"
-                    src="../images/img4.jpeg"
+                    src="./images/build.jpeg"
                     alt="welcome image"
                   />
                 </div>
                 <div className="h-[425px]">
                   <img
                     className="w-full h-full object-cover"
-                    src="../images/img4.jpeg"
+                    src="./images/lib.jpeg"
                     alt="welcome image"
                   />
                 </div>
@@ -494,16 +485,6 @@ const HomePage = () => {
               </div>
             </div>
           </section>
-          <section>
-            <iframe
-              src="https://goo.gl/maps/QvCkVVdDJVexyKHs7"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="min-h-[480px] w-full"
-            />
-          </section>
           <footer>
             <div className="bg-nero py-16 px-3">
               <div className="grid max-w-[1200px] mx-auto gap-8 text-center md:grid-cols-2 md:text-start lg:grid-cols-footer">
@@ -636,7 +617,7 @@ const HomePage = () => {
         </>
 
       </div>
-    </div>
+    </Transitions>
   )
 }
 

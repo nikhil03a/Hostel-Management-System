@@ -7,17 +7,21 @@ const Navbar = () => {
         localStorage.removeItem('user-token');
         navigate('/');
     }
-    return (
-        <div className='navbar-custom'>
-            <div className='flex items-center justify-between px-5 py-3'>
-                <div className='text-white font-extrabold text-xl'>CEG Hostels</div>
-                <div className='text-black bg-gray-200 flex flex-row items-center font-extralight justify-between p-2 rounded cursor-pointer hover:bg-gray-300' onClick={logout}>
-                    <div className='mr-2'><BiLogOut /></div>
-                    <div>Logout</div>
-                </div>
-            </div>
-        </div>
 
+    return (
+        <nav className="bg-cyan-600 py-3">
+            <div className="container mx-auto flex justify-between items-center">
+                <h1 className="text-white text-xl font-bold tracking-widest">CEG Hostels</h1>
+                <ul className="flex space-x-4">
+                    <li>
+                        <button className='text-black bg-gray-200 flex rounded-full font-sans font-semibold flex-row items-center  justify-between p-2 cursor-pointer hover:bg-gray-300 shadow' onClick={logout}>
+                            <div className='mr-2'><BiLogOut /></div>
+                            <div>Logout</div>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </nav >
     )
 }
 

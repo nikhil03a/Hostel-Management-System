@@ -21,33 +21,43 @@ import ViewMessBill from './pages/ViewMessBill';
 import ViewAttendance from './pages/ViewAttendance';
 import ApplyMessReduction from './pages/ApplyMessReduction';
 import AdminViewStudent from './pages/AdminViewStudent';
+import { AnimatePresence } from 'framer-motion';
+import { useLocation, Switch } from 'react-router-dom';
 function App() {
+  const Animated = () => {
+    const location = useLocation();
+    return (
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route exact path='/' element={<HomePage />}></Route>
+          <Route exact path='/admin-login' element={<AdminLoginPage />}></Route>
+          <Route exact path='/admin' element={<AdminPage />}></Route>
+          <Route exact path='/warden-login' element={<WardenLoginPage />}></Route>
+          <Route path='/warden/:id' element={<WardenPage />}></Route>
+          <Route exact path='/student-login' element={<StudentLoginPage />}></Route>
+          <Route exact path='/student-register' element={<StudentRegForm />}></Route>
+          <Route path='/student/:id' element={<StudentPage />}></Route>
+          <Route exact path='/admin/approval' element={<AdminApproval />}></Route>
+          <Route exact path='/admin/enable-room' element={<EnableRoom />}></Route>
+          <Route exact path='/admin/view-warden' element={<ViewWarden />}></Route>
+          <Route path='/student/room/:id' element={<StudentRoom />}></Route>
+          <Route exact path='/student-register' element={<StudentRegForm />}></Route>
+          <Route exact path='/warden-register' element={<WardenRegForm />}></Route>
+          <Route path='/warden/approval/:id' element={<WardenApproval />}></Route>
+          <Route path='/warden/attendance/:id' element={<MarkAttendance />}></Route>
+          <Route path='/warden/mess/:id' element={<UpdateMessBill />}></Route>
+          <Route path='/warden/view-student/:id' element={<ViewStudent />}></Route>
+          <Route path='/student/messbill/:id' element={<ViewMessBill />}></Route>
+          <Route path='/student/attendance/:id' element={<ViewAttendance />}></Route>
+          <Route path='/student/reduction/:id' element={<ApplyMessReduction />}></Route>
+          <Route exact path='/admin/view-student' element={<AdminViewStudent />}></Route>
+        </Routes>
+      </AnimatePresence>
+    )
+  }
   return (
     <BrowserRouter>
-      <Routes>
-        <Route exact path='/' element={<HomePage />}></Route>
-        <Route exact path='/admin-login' element={<AdminLoginPage />}></Route>
-        <Route exact path='/admin' element={<AdminPage />}></Route>
-        <Route exact path='/warden-login' element={<WardenLoginPage />}></Route>
-        <Route path='/warden/:id' element={<WardenPage />}></Route>
-        <Route exact path='/student-login' element={<StudentLoginPage />}></Route>
-        <Route exact path='/student-register' element={<StudentRegForm />}></Route>
-        <Route path='/student/:id' element={<StudentPage />}></Route>
-        <Route exact path='/admin/approval' element={<AdminApproval />}></Route>
-        <Route exact path='/admin/enable-room' element={<EnableRoom />}></Route>
-        <Route exact path='/admin/view-warden' element={<ViewWarden />}></Route>
-        <Route path='/student/room/:id' element={<StudentRoom />}></Route>
-        <Route exact path='/student-register' element={<StudentRegForm />}></Route>
-        <Route exact path='/warden-register' element={<WardenRegForm />}></Route>
-        <Route path='/warden/approval/:id' element={<WardenApproval />}></Route>
-        <Route path='/warden/attendance/:id' element={<MarkAttendance />}></Route>
-        <Route path='/warden/mess/:id' element={<UpdateMessBill />}></Route>
-        <Route path='/warden/view-student/:id' element={<ViewStudent />}></Route>
-        <Route path='/student/messbill/:id' element={<ViewMessBill />}></Route>
-        <Route path='/student/attendance/:id' element={<ViewAttendance />}></Route>
-        <Route path='/student/reduction/:id' element={<ApplyMessReduction />}></Route>
-        <Route exact path='/admin/view-student' element={<AdminViewStudent />}></Route>
-      </Routes>
+      <Animated />
     </BrowserRouter>
 
   );
