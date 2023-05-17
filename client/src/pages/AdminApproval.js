@@ -5,6 +5,7 @@ import ApprovalComponent from '../components/ApprovalComponent'
 import Navbar from '../components/Navbar'
 import SideBar from '../components/SideBar'
 import { FaTachometerAlt, FaKey, FaUserCircle, FaUsersCog, FaBed } from 'react-icons/fa'
+import Transitions from '../components/Transitions'
 
 
 const AdminApproval = () => {
@@ -94,7 +95,7 @@ const AdminApproval = () => {
     renderedItems = (<div style={{border:"1px solid gray"}} className='flex-1 uppercase text-green-600 border rounded font-serif shadow-lg p-8 tracking-widest m-10 font-bold text-2xl'>Everything up to date...</div>)
   }
   return (
-    <div className='relative'>
+    <Transitions>
       <Navbar />
       <div className='flex space-x-10'>
         <div>
@@ -111,7 +112,7 @@ const AdminApproval = () => {
 
 
       </div>
-    </div>
+    </Transitions>
   )
 }
 

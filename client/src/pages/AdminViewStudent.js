@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import SideBar from '../components/SideBar'
 import Navbar from '../components/Navbar'
 import { FaTachometerAlt, FaKey, FaUserCircle, FaUsersCog, FaBed } from 'react-icons/fa'
+import Transitions from '../components/Transitions'
 
 const AdminViewStudent = () => {
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ const AdminViewStudent = () => {
         e.preventDefault();
     }
     return (
-        <div>
+        <Transitions>
             <Navbar />
             <div className='flex flex-row'>
                 <div>
@@ -64,7 +65,7 @@ const AdminViewStudent = () => {
         </div>
 
             </div>
-        </div>
+        </Transitions>
     )
 }
 

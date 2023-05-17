@@ -211,9 +211,18 @@ app.get('/warden/view-students/:id', async (req, res) => {
     })
 })
 app.get('/student/dashboard/:id', async (req, res) => {
-    db.query("select * from student join hostelstudent join hostelvacancy on student.id=hostelstudent.studentid and hostelstudent.roomid=hostelvacancy.id where student.id=?", [req.params.id], (err, data) => {
-        res.json(data);
+    db.query('select * from hostelstudent where studentid=?',[req.params.id],(err,data)=>{
+        if(data.length > 0){
+            db.query("select * from student join hostelstudent join hostelvacancy on student.id=hostelstudent.studentid and hostelstudent.roomid=hostelvacancy.id where student.id=?", [req.params.id], (err, data) => {
+                res.json(data);
+            })
+        }else{
+            db.query("select * from student where id=?",[req.params.id],(err,data)=>{
+                res.json(data);
+            })
+        }
     })
+    
 })
 app.get('/warden/dashboard/:id', async (req, res) => {
     db.query("select * from warden where id=?", [req.params.id], (err, data) => {

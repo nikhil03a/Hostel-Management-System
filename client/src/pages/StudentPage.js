@@ -5,8 +5,10 @@ import SideBar from '../components/SideBar';
 import { FaTachometerAlt, FaBed, FaUserCheck, FaFileInvoice, FaMinusCircle } from 'react-icons/fa'
 import DashBoard from '../components/DashBoard';
 import AnnouncementTab from '../components/AnnouncementTab';
+import Transitions from '../components/Transitions';
 const StudentPage = () => {
   const navigate = useNavigate();
+  const [data, setData] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const checkUserToken = () => {
     const userToken = localStorage.getItem('user-token');
@@ -18,10 +20,7 @@ const StudentPage = () => {
       navigate('/');
     }
   }
-  useEffect(() => {
-    checkUserToken();
-  }, [isLoggedIn])
-  const [data, setData] = useState([]);
+  console.log(data);
   useEffect(() => {
     const getDetails = async () => {
       await fetch("http://localhost:8800/student/dashboard/" + localStorage.getItem('id'), {
@@ -86,10 +85,10 @@ const StudentPage = () => {
 
   ];
   return (
-    <div>
+    <Transitions>
       <Navbar />
       <div className='flex'>
-        <div><SideBar links={[
+        <div><SideBar user="Student"  links={[
           { label: "Dashboard", path: "/student/" + localStorage.getItem("id"), icon: FaTachometerAlt },
           { label: "Room Allocation", path: "/student/room/" + localStorage.getItem("id"), icon: FaBed },
           { label: "View Attendance", path: "/student/attendance/" + localStorage.getItem('id'), icon: FaUserCheck },
@@ -106,7 +105,7 @@ const StudentPage = () => {
         </div>
       </div>
 
-    </div>
+    </Transitions>
   )
 }
 

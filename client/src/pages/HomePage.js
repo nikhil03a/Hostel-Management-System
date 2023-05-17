@@ -116,21 +116,18 @@ const HomePage = () => {
           </div>
         </nav>
 
-        <section className="bg-gray-100 min-h-[640px] mx-auto px-3 flex items-center py-16 mt-0 bg-center h-screen bg-cover" style={{ backgroundImage: "url('./main2.jpg')" }}>
+        <section className="bg-[url('pages/images/main3.jpg')]   bg-no-repeat min-h-[640px] mx-auto px-3 flex items-center py-16 mt-0 bg-center h-screen bg-cover">
           <div className="container max-w-[1200px] mx-auto grid md:grid-cols-2 gap-14">
-            <div className="flex flex-col justify-center items-start">
-              <h3 className="text-coyote font-normal opacity-70 tracking-[.25em] font-barlow-cond text-xl sm:text-[22px] uppercase">
+            <div className="flex flex-col justify-center items-start bg-white p-5 shadow-lg border rounded-lg bg-opacity-80">
+              <h3 className="text-coyote font-bold opacity-70 tracking-[.25em] font-barlow-cond text-xl sm:text-[22px] uppercase">
                 welcome to
               </h3>
-              <h1 className="font-gilda text-2xl sm:text-[38px] tracking-[.04em] font-normal py-3 text-gray-700 mb-3">
+              <h1 className="font-gilda text-2xl sm:text-[38px] tracking-[.04em] py-3 text-gray-700 mb-3 font-bold">
                 CEG Hostels
               </h1>
-              <p className="opacity-60 font-light font-barlow text-justify text-base sm:text-lg text-gray-500">
+              <p className="opacity-70 font-gilda text-justify text-sm sm:text-lg text-black">
                 CEG hostels provide hostel facilities to the students of College of Engineering Guindy which has a legacy of over 230 years. It is known for its quality service at affordable fees. It is a well-organized organization with a great set of employees who strive hard for the well-being of the students.
               </p>
-            </div>
-            <div>
-              <img src={MainPic}></img>
             </div>
           </div>
         </section>

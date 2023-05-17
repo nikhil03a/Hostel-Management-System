@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import SideBar from '../components/SideBar'
 import { useNavigate } from 'react-router-dom'
 import { FaTachometerAlt, FaKey, FaUserCircle, FaUsersCog, FaBed } from 'react-icons/fa'
+import Transitions from '../components/Transitions'
 
 const ViewWarden = () => {
 
@@ -31,7 +32,7 @@ const ViewWarden = () => {
         e.preventDefault();
     }
     return (
-        <div>
+        <Transitions>
             <Navbar />
             <div className='flex'>
                 <div><SideBar user="Admin" links={[
@@ -65,7 +66,7 @@ const ViewWarden = () => {
 
 
             </div>
-        </div>
+        </Transitions>
     )
 }
 

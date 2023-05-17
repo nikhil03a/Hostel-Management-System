@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert'
+import Transitions from '../components/Transitions'
 const StudentRegForm = () => {
   var dtToday = new Date();
   var month = dtToday.getMonth() + 1;
@@ -127,7 +128,7 @@ const StudentRegForm = () => {
 
 
   return (
-    <div>
+    <Transitions>
       <section className=" py-1 bg-blueGray-50">
         <div className="w-full lg:w-8/12 px-4 mx-auto mt-6">
           <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
@@ -583,7 +584,7 @@ const StudentRegForm = () => {
         </div>
       </section>
 
-    </div>
+    </Transitions>
   )
 }
 

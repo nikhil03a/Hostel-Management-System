@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Transitions from '../components/Transitions';
 const AdminLoginPage = () => {
   const navigate = useNavigate();
   const [uname, setUname] = useState('');
@@ -52,7 +53,7 @@ const AdminLoginPage = () => {
 
   }
   return (
-    <div>
+    <Transitions>
       <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
         <div className="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-xl">
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -77,7 +78,7 @@ const AdminLoginPage = () => {
           </form>
         </div>
       </div>
-    </div>
+    </Transitions>
   )
 }
 

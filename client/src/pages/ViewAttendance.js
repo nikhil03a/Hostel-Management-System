@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import SideBar from '../components/SideBar';
 import { FaTachometerAlt, FaBed, FaUserCheck, FaFileInvoice, FaMinusCircle } from 'react-icons/fa'
+import Transitions from '../components/Transitions';
 const ViewAttendance = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -30,11 +31,11 @@ const ViewAttendance = () => {
     e.preventDefault();
   }
   return (
-    <div>
+    <Transitions>
       <Navbar />
       <div className='flex'>
         <div>
-          <SideBar links={[
+          <SideBar user="Student"  links={[
             { label: "Dashboard", path: "/student/" + localStorage.getItem("id"), icon: FaTachometerAlt },
             { label: "Room Allocation", path: "/student/room/" + localStorage.getItem("id"), icon: FaBed },
             { label: "View Attendance", path: "/student/attendance/" + localStorage.getItem('id'), icon: FaUserCheck },
@@ -82,7 +83,7 @@ const ViewAttendance = () => {
           </table>
         </div>
       </div>
-    </div>
+    </Transitions>
   )
 }
 

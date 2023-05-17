@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
+import Transitions from '../components/Transitions'
 const StudentLoginPage = () => {
   const navigate = useNavigate();
   const [uname, setUname] = useState('');
@@ -56,7 +57,7 @@ const StudentLoginPage = () => {
       })
   }
   return (
-    <div>
+    <Transitions>
       <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
         <div className="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-xl">
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -83,7 +84,7 @@ const StudentLoginPage = () => {
           </form>
         </div>
       </div>
-    </div>
+    </Transitions>
   )
 }
 

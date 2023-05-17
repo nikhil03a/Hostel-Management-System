@@ -5,6 +5,7 @@ import SideBar from '../components/SideBar';
 import { FaTachometerAlt, FaBed, FaUserCheck, FaFileInvoice, FaMinusCircle } from 'react-icons/fa'
 
 import swal from 'sweetalert';
+import Transitions from '../components/Transitions';
 const StudentRoom = () => {
     const [isAlloted, setIsAlloted] = useState(false);
     const navigate = useNavigate();
@@ -118,11 +119,11 @@ const StudentRoom = () => {
         console.log(data);
     }
     return (
-        <div className='relative'>
+        <Transitions>
             <Navbar />
-            <div className='flex space-x-10'>
+            <div className='flex'>
                 <div>
-                    <SideBar links={[
+                    <SideBar user="Student" links={[
                         { label: "Dashboard", path: "/student/" + localStorage.getItem("id"), icon: FaTachometerAlt },
                         { label: "Room Allocation", path: "/student/room/" + localStorage.getItem("id"), icon: FaBed },
                         { label: "View Attendance", path: "/student/attendance/" + localStorage.getItem('id'), icon: FaUserCheck },
@@ -135,10 +136,10 @@ const StudentRoom = () => {
                                 <div className='flex justify-between'><div className='font-semibold text-gray-800 px-6 text-xl'>Hostel:</div><div className='uppercase'> {data.hostel}</div></div><br></br>
                                 <div className='flex justify-between'><div className='font-semibold text-gray-800 px-6 text-xl'>Room:</div><div> {data.room}</div></div>
                             </div> : isEnable ?
-                                <div>
-                                    <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
+                                <div className='ml-20'>
+                                    <div className="relative flex flex-col mt-20 overflow-hidden">
                                         <div className="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-xl">
-                                            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                                            <h2 className="text-center text-3xl font-extrabold text-gray-900">
                                                 Select Hostel and Room
                                             </h2>
                                             <form className='mt-6'>
@@ -170,11 +171,11 @@ const StudentRoom = () => {
                                             </form>
                                         </div>
                                     </div>
-                                </div> : "The Process is Closed"
+                                </div> : <div className="items-center justify-between mb-4 mr-6  bg-gray-100 rounded p-12 shadow-lg mt-20 ml-20 text-xl text-center font-gilda font-bold text-yellow-700">The Process is closed as of now.<br></br> Please Contact Administrator for further details.</div>
                         }
                     </div>
                 </div>
-            </div>
+            </Transitions>
     )
 }
 

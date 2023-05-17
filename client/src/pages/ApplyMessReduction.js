@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import SideBar from '../components/SideBar';
 import swal from 'sweetalert';
 import {FaTachometerAlt,FaBed,FaUserCheck, FaFileInvoice ,FaMinusCircle} from 'react-icons/fa'
+import Transitions from '../components/Transitions';
 
 const ApplyMessReduction = () => {
   const navigate = useNavigate();
@@ -81,10 +82,10 @@ const ApplyMessReduction = () => {
     
   }
   return (
-    <div className='relative'>
+    <Transitions>
       <Navbar />
       <div className='flex space-x-10'>
-        <div><SideBar links={[
+        <div><SideBar user="Student"  links={[
           { label: "Dashboard", path: "/student/"+localStorage.getItem("id") , icon: FaTachometerAlt},
           { label: "Room Allocation", path: "/student/room/"+localStorage.getItem("id"),icon: FaBed },
           {label:"View Attendance",path:"/student/attendance/"+localStorage.getItem('id'), icon: FaUserCheck},
@@ -120,7 +121,7 @@ const ApplyMessReduction = () => {
           </table>
         </div>
       </div>
-    </div>
+    </Transitions>
   )
 }
 

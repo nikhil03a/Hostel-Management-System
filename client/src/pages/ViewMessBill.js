@@ -5,6 +5,7 @@ import SideBar from '../components/SideBar';
 import {FaTachometerAlt,FaBed,FaUserCheck, FaFileInvoice ,FaMinusCircle} from 'react-icons/fa'
 
 import swal from 'sweetalert';
+import Transitions from '../components/Transitions';
 const ViewMessBill = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -32,10 +33,10 @@ const ViewMessBill = () => {
     e.preventDefault();
   }
   return (
-    <div className='relative'>
+    <Transitions>
       <Navbar />
       <div className='flex space-x-10'>
-        <div><SideBar links={[
+        <div><SideBar user="Student"  links={[
           { label: "Dashboard", path: "/student/"+localStorage.getItem("id") , icon: FaTachometerAlt},
           { label: "Room Allocation", path: "/student/room/"+localStorage.getItem("id"),icon: FaBed },
           {label:"View Attendance",path:"/student/attendance/"+localStorage.getItem('id'), icon: FaUserCheck},
@@ -83,7 +84,7 @@ const ViewMessBill = () => {
           </table>
         </div>
       </div>
-    </div>
+    </Transitions>
   )
 }
 

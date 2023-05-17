@@ -4,6 +4,7 @@ import SideBar from '../components/SideBar'
 import Navbar from '../components/Navbar'
 import { Chart } from 'chart.js'
 import { FaTachometerAlt, FaKey, FaUserCircle, FaUsersCog, FaBed, FaUserShield, FaUsers, FaBuilding } from 'react-icons/fa'
+import Transitions from '../components/Transitions'
 const AdminPage = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,7 +23,7 @@ const AdminPage = () => {
 
 
   return (
-    <div>
+    <Transitions>
       <Navbar />
       <div className='flex'>
         <div>
@@ -94,7 +95,7 @@ const AdminPage = () => {
 
       </div>
 
-    </div>
+    </Transitions>
   )
 }
 

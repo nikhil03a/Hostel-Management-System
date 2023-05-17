@@ -4,6 +4,7 @@ import SideBar from '../components/SideBar'
 import { useNavigate } from 'react-router-dom'
 import {FaTachometerAlt,FaKey,FaUserCircle,FaUsersCog,FaBed} from 'react-icons/fa'
 import swal from 'sweetalert'
+import Transitions from '../components/Transitions'
 const EnableRoom = () => {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -70,7 +71,7 @@ const EnableRoom = () => {
         })
     }
     return (
-        <div>
+        <Transitions>
             <Navbar />
             <div className='flex space-x-8'>
                 <div>
@@ -89,7 +90,7 @@ const EnableRoom = () => {
                     <button onClick={handleClick} className='bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow'>Enable / Disable</button>
                 </div>
             </div>
-        </div>
+        </Transitions>
     )
 }
 
