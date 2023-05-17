@@ -5,8 +5,10 @@ import SideBar from '../components/SideBar';
 import { FaTachometerAlt, FaSignInAlt, FaUser, FaCheckSquare, FaCalculator } from 'react-icons/fa'
 import Transitions from '../components/Transitions'
 import DashBoard from '../components/DashBoard'
+import AnnouncementTab from '../components/AnnouncementTab';
 const WardenPage = () => {
   const navigate = useNavigate();
+  const [data, setData] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const checkUserToken = () => {
     const userToken = localStorage.getItem('user-token');
@@ -18,10 +20,6 @@ const WardenPage = () => {
       navigate('/');
     }
   }
-  useEffect(() => {
-    checkUserToken();
-  }, [isLoggedIn])
-  const [data, setData] = useState();
   useEffect(() => {
     const getDetails = async () => {
       await fetch("http://localhost:8800/warden/dashboard/" + localStorage.getItem('id'), {
@@ -56,7 +54,7 @@ const WardenPage = () => {
       label: 'E-mail',
       value: (data) => data.email
     },
-     {
+    {
       label: "College Name",
       value: (data) => data.clgname
     },
@@ -75,22 +73,22 @@ const WardenPage = () => {
     {
       label: "Area of Research",
       value: (data) => data.aoresearch
-    },{
+    }, {
       label: 'Mobile',
       value: (data) => data.mobile
     }, {
       label: "Blood Group",
       value: (data) => data.bloodgroup
-    },{
+    }, {
       label: "Address",
       value: (data) => data.address
-    },{
+    }, {
       label: "City",
       value: (data) => data.city
-    },{
+    }, {
       label: "Pin Code",
       value: (data) => data.pcode
-    },{
+    }, {
       label: "Blood Group",
       value: (data) => data.bloodgroup
     },
@@ -113,7 +111,9 @@ const WardenPage = () => {
             <div className='flex flex-wrap'>
               <DashBoard data={data} headers={headers1} />
             </div>
-
+          </div>
+          <div className='mt-20'>
+            <AnnouncementTab />
           </div>
         </div>
 

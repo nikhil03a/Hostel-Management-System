@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import SideBar from '../components/SideBar';
 import { FaTachometerAlt, FaBed, FaUserCheck, FaFileInvoice, FaMinusCircle } from 'react-icons/fa'
 import DashBoard from '../components/DashBoard';
+import AnnouncementTab from '../components/AnnouncementTab';
 const StudentPage = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -43,7 +44,6 @@ const StudentPage = () => {
     };
     getDetails();
   }, [])
-  console.log(data);
   const headers1 = [
     {
       label: 'Name',
@@ -79,9 +79,9 @@ const StudentPage = () => {
     }, {
       label: "City",
       value: (data) => data.city
-    },{
-      label: "Blood Group",
-      value: (data) => data.bloodgroup
+    }, {
+      label: "PIN Code",
+      value: (data) => data.pin
     },
 
   ];
@@ -95,12 +95,15 @@ const StudentPage = () => {
           { label: "View Attendance", path: "/student/attendance/" + localStorage.getItem('id'), icon: FaUserCheck },
           { label: "View Mess Bill", path: "/student/messbill/" + localStorage.getItem('id'), icon: FaFileInvoice },
           { label: 'Apply for Mess Reduction', path: '/student/reduction/' + localStorage.getItem('id'), icon: FaMinusCircle }]} /></div>
-      <div>
-        <div className='uppercase font-mono text-3xl p-5 font-bold'>DashBoard</div>
-        <div className='flex flex-wrap w-full'>
-          <DashBoard data={data} headers={headers1} />
+        <div>
+          <div className='uppercase font-mono text-3xl p-5 font-bold'>DashBoard</div>
+          <div className='flex flex-wrap' style={{width:"600px"}}>
+            <DashBoard data={data} headers={headers1} />
+          </div>
         </div>
-      </div>
+        <div className='mt-20 ml-20'>
+          <AnnouncementTab />
+        </div>
       </div>
 
     </div>

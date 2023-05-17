@@ -194,7 +194,7 @@ app.post('/warden/students/:id', async (req, res) => {
             if (data.length > 0) {
                 res.json({ message: "AE" })
             } else {
-                db.query("select * from student join hostelstudent join hostelvacancy on student.id=hostelstudent.studentid and hostelstudent.roomid=hostelvacancy.id where student.hostel=? and student.doj<=?", [hostel, req.body.date], (err, data) => {
+                db.query("select * from student join hostelstudent join hostelvacancy on student.id=hostelstudent.studentid and hostelstudent.roomid=hostelvacancy.id where student.hostel=? and student.doj<=? and student.approved=1", [hostel, req.body.date], (err, data) => {
                     res.json(data);
                 })
             }
@@ -205,7 +205,7 @@ app.get('/warden/view-students/:id', async (req, res) => {
     let hostel;
     db.query("select hostel from warden where id = ?", [req.params.id], (err, data) => {
         hostel = data[0].hostel;
-        db.query("select * from student join hostelstudent join hostelvacancy on student.id=hostelstudent.studentid and hostelstudent.roomid=hostelvacancy.id where student.hostel=?", [hostel], (err, data) => {
+        db.query("select * from student join hostelstudent join hostelvacancy on student.id=hostelstudent.studentid and hostelstudent.roomid=hostelvacancy.id where student.hostel=? and student.approved=1", [hostel], (err, data) => {
             res.json(data);
         })
     })
@@ -217,6 +217,7 @@ app.get('/student/dashboard/:id', async (req, res) => {
 })
 app.get('/warden/dashboard/:id', async (req, res) => {
     db.query("select * from warden where id=?", [req.params.id], (err, data) => {
+        if(err) console.log(err);
         res.json(data);
     })
 })

@@ -6,8 +6,8 @@ import SwimmingPool from './images/swimmingpool.jpg'
 import Badminton from './images/badminton.jpg'
 import Internet from './images/internet.jpg'
 import Parking from './images/parking.jpg'
-// import RoomService from './images/roomservice.jpg'
-// import Water from './images/water.jpg'
+import RoomService from './images/roomservice.jpg'
+import Water from './images/water.jpg'
 import Pic1 from './images/pic1.jpg'
 import Pic2 from './images/pic2.jpg'
 import HostelDay from './images/hostelday.jpg'
@@ -18,7 +18,7 @@ import MovieNight from './images/movienight.jpg'
 import Pic5 from './images/pic5.jpg'
 import Logo from './images/23494797.jpg'
 import Pic6 from './images/pic6.jpg'
-
+import MainPic from './images/main3.jpg'
 
 const HomePage = () => {
   useEffect(() => {
@@ -42,20 +42,20 @@ const HomePage = () => {
     {
       image: SwimmingPool,
       content: "Swimming Pool"
-    },{
+    }, {
       image: Internet,
       content: "High Speed Fibernet"
-    },{
+    }, {
       image: Badminton,
       content: 'Tennis Courts'
-    },{
+    }, {
       image: Parking,
       content: "Cycle Parking Areas"
-    },{
-      // image: Water,
+    }, {
+      image: Water,
       content: "RO Drinking Water"
-    },{
-      // image: RoomService,
+    }, {
+      image: RoomService,
       content: "Room Service"
     }
   ]
@@ -91,6 +91,9 @@ const HomePage = () => {
                   <a href="#amenities" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Amenities</a>
                 </li>
                 <li>
+                  <a href="#footer" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+                </li>
+                <li>
                   <button id="dropdownNavbarLink" onClick={toggleDropdown} data-dropdown-toggle="dropdownNavbar" class="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Login <svg class="w-5 h-5 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></button>
                   <div id="dropdownNavbar" className={`z-10 ${isDropdownOpen ? '' : 'hidden'
                     } font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-24 dark:bg-gray-700 dark:divide-gray-600 absolute`} class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
@@ -113,7 +116,7 @@ const HomePage = () => {
           </div>
         </nav>
 
-        <section className="bg-white min-h-[640px] mx-auto px-3 flex items-center py-16 mt-0 bg-center h-screen bg-cover" style={ {backgroundImage : "url('./pages/images/main.jpg')"}}>
+        <section className="bg-gray-100 min-h-[640px] mx-auto px-3 flex items-center py-16 mt-0 bg-center h-screen bg-cover" style={{ backgroundImage: "url('./main2.jpg')" }}>
           <div className="container max-w-[1200px] mx-auto grid md:grid-cols-2 gap-14">
             <div className="flex flex-col justify-center items-start">
               <h3 className="text-coyote font-normal opacity-70 tracking-[.25em] font-barlow-cond text-xl sm:text-[22px] uppercase">
@@ -123,12 +126,15 @@ const HomePage = () => {
                 CEG Hostels
               </h1>
               <p className="opacity-60 font-light font-barlow text-justify text-base sm:text-lg text-gray-500">
-                CEG hostels provide hostel facilities to the students of College of Engineering Guindy which has legacy of over 230 years. Its known for its 
-                quality service at afforable fees. It is a well organised organization with great set of employees who thrive hard for the well being of the students.              </p>
-              
+                CEG hostels provide hostel facilities to the students of College of Engineering Guindy which has a legacy of over 230 years. It is known for its quality service at affordable fees. It is a well-organized organization with a great set of employees who strive hard for the well-being of the students.
+              </p>
+            </div>
+            <div>
+              <img src={MainPic}></img>
             </div>
           </div>
         </section>
+
         <section className="py-16 px-3 bg-white" id='events'>
           <div className="container max-w-[1200px] mx-auto">
             <h2 className="font-gilda font-normal text-3xl sm:text-[46px] tracking-[.04em] text-coyote text-center mb-3">
@@ -177,7 +183,7 @@ const HomePage = () => {
                     Movie Night
                   </h3>
                   <p className="font-normal tracking-[.04em] font-barlow text-lg">
-                   Fun with friends - <span className="font-light">09:00 PM</span>
+                    Fun with friends - <span className="font-light">09:00 PM</span>
                   </p>
                 </div>
               </div>
@@ -213,7 +219,7 @@ const HomePage = () => {
               Gallery
             </h2>
             <div className="flex items-center justify-center">
-              <img  alt="" />
+              <img alt="" />
             </div>
             <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 mt-10">
               <div className="group min-h-[260px] relative after:absolute after:content-[''] after:left-0 after:top-0 after:w-full after:h-full after:bg-gradient-to-t after:from-black/75 after:to-black/5 after:opacity-0 hover:after:opacity-100 after:transition after:duration-300 after:ease-in-out overflow-hidden">
@@ -238,7 +244,7 @@ const HomePage = () => {
                   <span className="font-barlow text-lg font-normal">
                     Non A/C Room
                   </span>
-                  
+
                 </div>
               </div>
               <div className="group min-h-[260px] relative after:absolute after:content-[''] after:left-0 after:top-0 after:w-full after:h-full after:bg-gradient-to-t after:from-black/75 after:to-black/5 after:opacity-0 hover:after:opacity-100 after:transition after:duration-300 after:ease-in-out overflow-hidden">
@@ -251,7 +257,7 @@ const HomePage = () => {
                   <span className="font-barlow text-lg font-normal">
                     Dining Hall
                   </span>
-                  
+
                 </div>
               </div>
               <div className="group min-h-[260px] relative after:absolute after:content-[''] after:left-0 after:top-0 after:w-full after:h-full after:bg-gradient-to-t after:from-black/75 after:to-black/5 after:opacity-0 hover:after:opacity-100 after:transition after:duration-300 after:ease-in-out overflow-hidden">
@@ -264,7 +270,7 @@ const HomePage = () => {
                   <span className="font-barlow text-lg font-normal">
                     Playing Area
                   </span>
-                  
+
                 </div>
               </div>
               <div className="group min-h-[260px] relative after:absolute after:content-[''] after:left-0 after:top-0 after:w-full after:h-full after:bg-gradient-to-t after:from-black/75 after:to-black/5 after:opacity-0 hover:after:opacity-100 after:transition after:duration-300 after:ease-in-out overflow-hidden">
@@ -277,7 +283,7 @@ const HomePage = () => {
                   <span className="font-barlow text-lg font-normal">
                     Bunker Cot
                   </span>
-                  
+
                 </div>
               </div>
               <div className="group min-h-[260px] relative after:absolute after:content-[''] after:left-0 after:top-0 after:w-full after:h-full after:bg-gradient-to-t after:from-black/75 after:to-black/5 after:opacity-0 hover:after:opacity-100 after:transition after:duration-300 after:ease-in-out overflow-hidden">
@@ -290,7 +296,7 @@ const HomePage = () => {
                   <span className="font-barlow text-lg font-normal">
                     Library
                   </span>
-                  
+
                 </div>
               </div>
             </div>
@@ -299,7 +305,7 @@ const HomePage = () => {
         <section className="py-16 px-3 bg-banner-image bg-center bg-cover bg-fixed bg-no-repeat" id='amenities'>
           <div className="container max-w-[1200px] mx-auto">
             <h2 className="font-gilda font-normal text-3xl sm:text-[46px] tracking-[.04em] text-coyote text-center mb-3">
-             Amenities Available
+              Convenient amenities
             </h2>
             <div className="flex items-center justify-center">
               <img src="../images/img4.jpeg" alt="" />
@@ -322,11 +328,10 @@ const HomePage = () => {
           </div>
         </section>
         <footer>
-          <div className="bg-nero py-16 px-3">
+          <div className="bg-nero py-16 px-3" id='footer'>
             <div className="grid max-w-[1200px] mx-auto gap-8 text-center md:grid-cols-2 md:text-start lg:grid-cols-footer">
               <div className="md:me-2 lg:me-3">
                 <a
-                  href="index.html"
                   className="text-lion font-gilda font-normal text-2xl tracking-[.04em]"
                 >
                   CEG<span className="text-white">Hostels</span>
@@ -339,20 +344,17 @@ const HomePage = () => {
               </div>
               <div>
                 <h4 className="inline-block font-gilda tracking-[.04em] text-lg text-white capitalize relative after:absolute after:content-[''] after:left-0 after:-bottom-0 after:h-[1px] after:w-full after:bg-coyote pb-1 mb-4">
-                our services
+                  our offered facilities
                 </h4>
-                <ul>
+                <ul role="list" className='list-disc marker:text-orange-400'>
                   <li className="my-2">
-                    <a
-                      href="#"
-                      className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
+                    <a className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
                     >
-                     Safe and secure hostels
+                      Safe and secure hostels
                     </a>
                   </li>
                   <li className="my-2">
                     <a
-                      href="#"
                       className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
                     >
                       Healthy Food
@@ -360,7 +362,6 @@ const HomePage = () => {
                   </li>
                   <li className="my-2">
                     <a
-                      href="#"
                       className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
                     >
                       Hygienic Rooms
@@ -368,7 +369,6 @@ const HomePage = () => {
                   </li>
                   <li className="my-2">
                     <a
-                      href="#"
                       className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
                     >
                       Peaceful Environment
@@ -378,39 +378,35 @@ const HomePage = () => {
               </div>
               <div>
                 <h4 className="inline-block font-gilda tracking-[.04em] text-lg text-white capitalize relative after:absolute after:content-[''] after:left-0 after:-bottom-0 after:h-[1px] after:w-full after:bg-coyote pb-1 mb-4">
-                our services
+                  Accomodation Benefits
                 </h4>
-                <ul>
+                <ul role="list" className='list-disc marker:text-orange-400'>
                   <li className="my-2">
                     <a
-                      href="#"
                       className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
                     >
-                     Safe and secure hostels
+                      Convenient proximity to campus
                     </a>
                   </li>
                   <li className="my-2">
                     <a
-                      href="#"
                       className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
                     >
-                      Healthy Food
+                      Regular social events
                     </a>
                   </li>
                   <li className="my-2">
                     <a
-                      href="#"
                       className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
                     >
-                      Hygienic Rooms
+                      Study areas and quiet zones
                     </a>
                   </li>
                   <li className="my-2">
                     <a
-                      href="#"
                       className="capitalize font-barlow font-light text-base text-white hover:text-white/50 transition duration-300 ease-in-out"
                     >
-                      Peaceful Environment
+                      Access to essential amenities
                     </a>
                   </li>
                 </ul>
@@ -419,12 +415,12 @@ const HomePage = () => {
                 <h4 className="inline-block font-gilda tracking-[.04em] text-lg text-white capitalize relative after:absolute after:content-[''] after:left-0 after:-bottom-0 after:h-[1px] after:w-full after:bg-coyote pb-1 mb-4">
                   contact
                 </h4>
-                <ul>
+                <ul >
                   <li className="my-2">
                     <a
                       className="capitalize font-barlow font-light text-base text-white/50 transition duration-300 ease-in-out "
                     >
-                     CEG Hostel Office,
+                      CEG Hostel Office,
                     </a>
                   </li>
                   <li className="my-2">
@@ -442,10 +438,10 @@ const HomePage = () => {
                     </a>
                   </li>
                   <li className="my-2">
-                    <a
+                    <a href='tel:04422352257'
                       className="capitalize font-barlow font-light text-bas text-white/50 transition duration-300 ease-in-out"
                     >
-                      Phone: 044-2235-7711
+                      Phone: 044-2235-2257
                     </a>
                   </li>
                 </ul>
