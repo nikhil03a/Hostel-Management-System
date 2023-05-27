@@ -2,10 +2,9 @@ import Navbar from '../components/Navbar';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import SideBar from '../components/SideBar';
-import {FaTachometerAlt,FaBed,FaUserCheck, FaFileInvoice ,FaMinusCircle} from 'react-icons/fa'
-
-import swal from 'sweetalert';
+import { FaTachometerAlt, FaBed, FaUserCheck, FaFileInvoice, FaMinusCircle } from 'react-icons/fa'
 import Transitions from '../components/Transitions';
+import swal from 'sweetalert';
 const ViewMessBill = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -29,19 +28,50 @@ const ViewMessBill = () => {
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   }
-  const handleSubmit = (e)=>{
-    e.preventDefault();
+  const handleSubmit = async () => {
+    if(data.month === ''){
+      swal("Select Month","","warning")
+      return;
+    }else if(data.year === ''){
+      swal("Select Year","","warning")
+      return;
+    }
+    await fetch("http://localhost:8800/student/mess/" + localStorage.getItem('id'), {
+      method: 'POST',
+      body: JSON.stringify({
+        month: data.month,
+        year: data.year
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then((response) => {
+        return response.json()
+      })
+      .then(data => {
+        if (data.message == "Error") {
+          swal("Failed to Fetch Mess Bill", "", "error");
+        } else {
+          swal("Data Fetched Successfully", "Your Mess Bill is Rs. "+data.message, "success")
+        }
+      })
+      .catch(error => {
+        window.alert(error);
+        return;
+      })
+
   }
   return (
     <Transitions>
       <Navbar />
       <div className='flex space-x-10'>
-        <div><SideBar user="Student"  links={[
-          { label: "Dashboard", path: "/student/"+localStorage.getItem("id") , icon: FaTachometerAlt},
-          { label: "Room Allocation", path: "/student/room/"+localStorage.getItem("id"),icon: FaBed },
-          {label:"View Attendance",path:"/student/attendance/"+localStorage.getItem('id'), icon: FaUserCheck},
-          {label:"View Mess Bill", path:"/student/messbill/"+localStorage.getItem('id'),icon: FaFileInvoice},
-          {label:'Apply for Mess Reduction',path:'/student/reduction/'+localStorage.getItem('id'), icon: FaMinusCircle}]  }/></div>
+        <div><SideBar user="Student" links={[
+          { label: "Dashboard", path: "/student/" + localStorage.getItem("id"), icon: FaTachometerAlt },
+          { label: "Room Allocation", path: "/student/room/" + localStorage.getItem("id"), icon: FaBed },
+          { label: "View Attendance", path: "/student/attendance/" + localStorage.getItem('id'), icon: FaUserCheck },
+          { label: "View Mess Bill", path: "/student/messbill/" + localStorage.getItem('id'), icon: FaFileInvoice },
+          { label: 'Apply for Mess Reduction', path: '/student/reduction/' + localStorage.getItem('id'), icon: FaMinusCircle }]} /></div>
         <div>
           <table>
             <th>

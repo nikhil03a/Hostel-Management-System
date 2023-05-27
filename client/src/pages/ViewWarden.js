@@ -5,10 +5,13 @@ import SideBar from '../components/SideBar'
 import { useNavigate } from 'react-router-dom'
 import { FaTachometerAlt, FaKey, FaUserCircle, FaUsersCog, FaBed } from 'react-icons/fa'
 import Transitions from '../components/Transitions'
-
+import swal from 'sweetalert'
+import DataTable from '../components/DataTable'
 const ViewWarden = () => {
 
     const navigate = useNavigate();
+    const [arr, setArr] = useState([]);
+    const [isRendered, setIsRendered] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const checkUserToken = () => {
         const userToken = localStorage.getItem('user-token');
@@ -28,9 +31,59 @@ const ViewWarden = () => {
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        await fetch("http://localhost:8800/admin/view-warden/" , {
+            method: 'POST',
+            body: JSON.stringify({
+                hostel: data.hostel
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then((response) => {
+                return response.json()
+            })
+            .then(data => {
+                swal("Data fetched Successfully","","success")
+                setArr(data);
+                setIsRendered(true);
+            })
+            .catch(error => {
+                window.alert(error);
+                return;
+            })
     }
+    const headers = [
+        {
+            label: 'Name',
+            value: (data) => data.name
+        },
+        {
+            label: "Hostel",
+            value: (data) => data.hostel
+        },{
+            label: "E-mail",
+            value: (data)=> data.email
+        },
+        {
+            label: 'Mobile',
+            value: (data) => data.mobile
+        },
+        {
+            label: "Department",
+            value: (data) => data.dept
+        },
+        {
+            label: "Degree",
+            value: (data)=> data.degree
+        },{
+            label: "Area of Research",
+            value: (data)=> data.aoresearch
+        }
+
+    ];
     return (
         <Transitions>
             <Navbar />
@@ -62,6 +115,15 @@ const ViewWarden = () => {
                             </td>
                         </tr>
                     </table>
+                    <div>
+                        <div>
+                            {isRendered &&
+                                <div className='flex flex-col items-center'>
+                                    <DataTable generateData={arr} headers={headers} />
+                                </div>
+                            }
+                        </div>
+                    </div>
                 </div>
 
 

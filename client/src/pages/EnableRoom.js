@@ -84,7 +84,7 @@ const EnableRoom = () => {
           ]} />
                 </div>
                 <div className='mt-20'>
-                    {isEnable ? <div className='uppercase font-gilda font-bold shadow-lg p-8'> Room allocation process is currently enabled. Click below to disable</div> :
+                    {isEnable ? <div className='uppercase font-mont text-lg font-bold shadow-lg p-8'> Room allocation process is currently enabled. Click below to disable</div> :
                         <div className='uppercase shadow-lg p-8 font-gilda font-bold'>Room allocation process is currently disabled. Click below to enable</div>}
                     <br></br>
                     <button onClick={handleClick} className='bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow'>Enable / Disable</button>

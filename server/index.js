@@ -211,22 +211,22 @@ app.get('/warden/view-students/:id', async (req, res) => {
     })
 })
 app.get('/student/dashboard/:id', async (req, res) => {
-    db.query('select * from hostelstudent where studentid=?',[req.params.id],(err,data)=>{
-        if(data.length > 0){
+    db.query('select * from hostelstudent where studentid=?', [req.params.id], (err, data) => {
+        if (data.length > 0) {
             db.query("select * from student join hostelstudent join hostelvacancy on student.id=hostelstudent.studentid and hostelstudent.roomid=hostelvacancy.id where student.id=?", [req.params.id], (err, data) => {
                 res.json(data);
             })
-        }else{
-            db.query("select * from student where id=?",[req.params.id],(err,data)=>{
+        } else {
+            db.query("select * from student where id=?", [req.params.id], (err, data) => {
                 res.json(data);
             })
         }
     })
-    
+
 })
 app.get('/warden/dashboard/:id', async (req, res) => {
     db.query("select * from warden where id=?", [req.params.id], (err, data) => {
-        if(err) console.log(err);
+        if (err) console.log(err);
         res.json(data);
     })
 })
@@ -300,7 +300,9 @@ app.post('/warden/mess/:id', async (req, res) => {
                     db.query("select sum(days) as reductionDays from reduction join student on student.id=reduction.studid where student.hostel=? and MONTH(`from`)=?", [hostel, month], (err, data) => {
                         const reductionDays = data[0].reductionDays || 0;
                         const finalDays = totalDaysResided - reductionDays;
-                        db.query("insert into messbill (hostel,month,year,amount,days) values (?,?,?,?,?)", [hostel, month, year, amount, finalDays], (err, data) => {
+                        const ratio = amount * 1.0 / finalDays;
+                        db.query("insert into messbill (hostel,month,year,amount,days,perstudperday) values (?,?,?,?,?,?)", [hostel, month, year, amount, finalDays, ratio], (err, data) => {
+                            if (err) console.log(err);
                             res.json({ message: "SUCCESS" });
                         });
                     });
@@ -310,6 +312,87 @@ app.post('/warden/mess/:id', async (req, res) => {
     })
 });
 
+app.post('/student/mess/:id', (req, res) => {
+    const month = req.body.month;
+    let totalDaysResided = 0;
+    const year = req.body.year;
+    let hostel;
+    const startOfMonth = new Date(`${year}-${month}-01`);
+    const endOfMonth = new Date(startOfMonth.getFullYear(), startOfMonth.getMonth() + 1, 0);
+    db.query("select hostel,doj from student where id=?", [req.params.id], (err, data) => {
+        const doj = new Date(data[0].doj);
+        const daysInMonth = endOfMonth.getDate();
+        let daysResided;
+        hostel = data[0].hostel;
+        if (doj.getFullYear() < year || (doj.getFullYear() === year && doj.getMonth() < month - 1)) {
+            daysResided = daysInMonth;
+        } else if (doj.getFullYear() == year && doj.getMonth() == month - 1) {
+            daysResided = daysInMonth - doj.getDate() + 1;
+        } else {
+            daysResided = 0;
+        }
+        totalDaysResided += daysResided;
+    });
+    db.query("select sum(days) as reductionDays from reduction join student on student.id=reduction.studid where student.id=? and MONTH(`from`)=?", [req.params.id, month], (err, data) => {
+        const reductionDays = data[0].reductionDays || 0;
+        const finalDays = totalDaysResided - reductionDays;
+        db.query("select perstudperday from messbill where hostel=? and month=? and year=?", [hostel, month, year], (err, data) => {
+            if (data.length === 0)
+                res.json({ message: "Error" });
+            else
+                res.json({ message: finalDays * data[0].perstudperday });
+        });
+    });
+});
+app.post('/student/attendance/:id', (req, res) => {
+    const studentId = req.params.id;
+    const month = req.body.month;
+    const year = req.body.year;
+    const query = `
+      SELECT date
+      FROM attendance
+      WHERE studid = ?
+        AND MONTH(date) = ?
+        AND YEAR(date) = ?
+    `;
+    const present = [];
+    const reduction = [];
+    db.query(query, [studentId, month, year], (err, results) => {
+        if (err) {
+            console.error('Error executing query:', err);
+            res.status(500).json({ error: 'Internal Server Error' });
+            return;
+        }
+        results.forEach((result) => {
+            present.push(result.date.getDate());
+        })
+    });
+    db.query('SELECT `from`,`to` FROM reduction WHERE studid = ? AND MONTH(`from`) = ? AND YEAR(`from`) = ?', [studentId, month, year], (err, results) => {
+        if (err) {
+            console.error('Error executing query:', err);
+            res.status(500).json({ error: 'Internal Server Error' });
+            return;
+        }
+        results.forEach(row => {
+            const { from, to } = row;
+            const startDate = new Date(from);
+            const endDate = new Date(to);
+            const currentDate = new Date(startDate);
+
+            while (currentDate <= endDate) {
+                reduction.push(currentDate.getDate());
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+        });
+        res.json({present:present,reduction:reduction,month:month,year:year})
+    });
+    
+})
+app.post('/student/doj/:id',(req,res)=>{
+    db.query('select doj from student where id=?',[req.params.id],(err,data)=>{
+        res.json({doj:data[0].doj})
+    })
+})
 app.get('/admin/room-enable', async (req, res) => {
     db.query("select value from roomenable where id=1", (err, data) => {
         if (data[0].value == 1) {
@@ -389,6 +472,16 @@ app.get("/student", (req, res) => {
     db.query(q, (err, data) => {
         if (err) return res.json(err);
         else return res.json(moment(data[0].dob).utc().format('DD/MM/YYYY'));
+    })
+})
+app.post("/admin/view-warden", (req, res) => {
+    db.query("select * from warden where hostel=? and approved=1", [req.body.hostel], (err, data) => {
+        res.json(data);
+    })
+})
+app.post('/admin/view-students', async (req, res) => {
+    db.query("select * from student join hostelstudent join hostelvacancy on student.id=hostelstudent.studentid and hostelstudent.roomid=hostelvacancy.id where student.hostel=? and student.approved=1", [req.body.hostel], (err, data) => {
+        res.json(data);
     })
 })
 app.listen(8800, () => {
