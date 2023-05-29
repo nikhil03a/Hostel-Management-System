@@ -74,9 +74,11 @@ const StudentRegForm = () => {
       swal("Validation Error", "Please enter valid value for semester field", "error");
     }else if(!details.rollno.match(validMobile)){
       swal("Validation Error", "Please enter valid Roll Number", "error");
-    }else if(details.joindate === '' || details.joindate < minDate){
+    }
+    else if(details.joindate === '' || details.joindate < minDate){
       swal("Validation Error", "Please enter valid Joining Date", "error");
-    }else if(details.fname === ''){
+    }
+    else if(details.fname === ''){
       swal("Validation Error", "Please enter your father's name", "error");
     }else if(details.foccupation === ''){
       swal("Validation Error", "Please enter your father's occupation", "error");

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import SideBar from '../components/SideBar';
 import swal from 'sweetalert'
-import { FaTachometerAlt, FaSignInAlt, FaUser, FaCheckSquare, FaCalculator } from 'react-icons/fa'
+import { FaTachometerAlt, FaSignInAlt, FaUser, FaCheckSquare, FaCalculator,FaExclamation } from 'react-icons/fa'
 import Transitions from '../components/Transitions'
 import DataTable from '../components/DataTable';
 
@@ -119,11 +119,12 @@ const MarkAttendance = () => {
             <Navbar />
             <div className='flex space-x-10'>
                 <div><SideBar user="Warden" links={[
-                    { label: "Dashboard", path: '/warden/' + localStorage.getItem('id'), icon: FaTachometerAlt },
-                    { label: "Authenticate Student", path: "/warden/approval/" + localStorage.getItem('id'), icon: FaSignInAlt },
-                    { label: "View Student Details", path: "/warden/view-student/" + localStorage.getItem('id'), icon: FaUser },
-                    { label: "Mark Attendance", path: '/warden/attendance/' + localStorage.getItem('id'), icon: FaCheckSquare },
-                    { label: "Update Mess Bill", path: '/warden/mess/' + localStorage.getItem('id'), icon: FaCalculator }]} /></div>
+                        { label: "Dashboard", path: '/warden/' + localStorage.getItem('id'), icon: FaTachometerAlt },
+                        { label: "Authenticate Student", path: "/warden/approval/" + localStorage.getItem('id'), icon: FaSignInAlt },
+                        { label: "View Student Details", path: "/warden/view-student/" + localStorage.getItem('id'), icon: FaUser },
+                        { label: "Mark Attendance", path: '/warden/attendance/' + localStorage.getItem('id'), icon: FaCheckSquare },
+                        { label: "Update Mess Bill", path: '/warden/mess/' + localStorage.getItem('id'), icon: FaCalculator },
+                        { label: "Add BlackMark",path:'/warden/bm/'+localStorage.getItem('id'),icon: FaExclamation}]} /></div>
                 <div>
                     <table>
                         <th>

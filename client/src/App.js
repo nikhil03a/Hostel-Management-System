@@ -23,6 +23,7 @@ import ApplyMessReduction from './pages/ApplyMessReduction';
 import AdminViewStudent from './pages/AdminViewStudent';
 import { AnimatePresence } from 'framer-motion';
 import { useLocation, Switch } from 'react-router-dom';
+import BlackMark from './pages/BlackMark';
 function App() {
   const Animated = () => {
     const location = useLocation();
@@ -51,6 +52,7 @@ function App() {
           <Route path='/student/attendance/:id' element={<ViewAttendance />}></Route>
           <Route path='/student/reduction/:id' element={<ApplyMessReduction />}></Route>
           <Route exact path='/admin/view-student' element={<AdminViewStudent />}></Route>
+          <Route path='/warden/bm/:id' element={<BlackMark />}></Route>
         </Routes>
       </AnimatePresence>
     )

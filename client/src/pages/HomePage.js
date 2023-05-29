@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import GoogleMapReact from 'google-map-react'
 import Transitions from '../components/Transitions'
 import SwimmingPool from './images/swimmingpool.jpg'
@@ -18,8 +17,7 @@ import MovieNight from './images/movienight.jpg'
 import Pic5 from './images/pic5.jpg'
 import Logo from './images/23494797.jpg'
 import Pic6 from './images/pic6.jpg'
-import MainPic from './images/main3.jpg'
-
+import underline from './images/decorated.svg'
 const HomePage = () => {
   useEffect(() => {
     localStorage.clear();
@@ -138,7 +136,7 @@ const HomePage = () => {
               Events
             </h2>
             <div className="flex items-center justify-center">
-              <img src="../images/img4.jpeg" alt="" />
+              <img src={underline} alt="" />
             </div>
             <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3 mt-10">
               <div className="min-h-[323px] relative">
@@ -216,7 +214,7 @@ const HomePage = () => {
               Gallery
             </h2>
             <div className="flex items-center justify-center">
-              <img alt="" />
+            <img src={underline} alt="" />
             </div>
             <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 mt-10">
               <div className="group min-h-[260px] relative after:absolute after:content-[''] after:left-0 after:top-0 after:w-full after:h-full after:bg-gradient-to-t after:from-black/75 after:to-black/5 after:opacity-0 hover:after:opacity-100 after:transition after:duration-300 after:ease-in-out overflow-hidden">
@@ -305,8 +303,9 @@ const HomePage = () => {
               Convenient amenities
             </h2>
             <div className="flex items-center justify-center">
-              <img src="../images/img4.jpeg" alt="" />
+            <img src={underline} alt="" />
             </div>
+            <br></br>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {data.map((item, index) => (
                 <div key={index} className="relative">

@@ -33,6 +33,10 @@ const ViewWarden = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(data.hostel===''){
+            swal("Please select Hostel","","warning");
+            return;
+        }
         await fetch("http://localhost:8800/admin/view-warden/" , {
             method: 'POST',
             body: JSON.stringify({

@@ -59,9 +59,17 @@ const AdminViewStudent = () => {
       label: "Emergency Contact",
       value: (data) => data.fathermobile
     },
-
+    
+    {
+      label:"BlackMark",
+      value: (data)=> data.blackmark!=null ? data.blackmark : "NIL"
+  }
   ];
   const handleSubmit = async () => {
+    if(data.hostel === ''){
+      swal("Please select Hostel","","warning");
+      return;
+    }
     await fetch("http://localhost:8800/admin/view-students/", {
       method: 'POST',
       body: JSON.stringify({

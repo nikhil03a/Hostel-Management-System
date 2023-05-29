@@ -268,7 +268,12 @@ app.post('/warden/attendance/:id', async (req, res) => {
         }
     });
 });
-
+app.post('/warden/bm/:id',(req,res)=>{
+    db.query("update student set blackmark=? where name=?",[req.body.blackmark,req.body.name],(err,data)=>{
+        if(err) res.json({message:"AE"})
+        else res.json({message:"SUCCESS"})
+    })
+})
 app.post('/warden/mess/:id', async (req, res) => {
     let hostel;
     const month = req.body.month;
@@ -282,7 +287,7 @@ app.post('/warden/mess/:id', async (req, res) => {
             if (data.length > 0) {
                 res.json({ message: "AE" })
             } else {
-                db.query("select id, doj from student where hostel=?", [hostel], (err, data) => {
+                db.query("select id, doj from student where hostel=? and approved=1", [hostel], (err, data) => {
                     let totalDaysResided = 0;
                     data.forEach(student => {
                         const doj = new Date(student.doj);

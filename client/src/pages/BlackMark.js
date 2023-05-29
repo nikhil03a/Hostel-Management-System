@@ -1,14 +1,15 @@
 import Navbar from '../components/Navbar';
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useAsyncError, useNavigate } from 'react-router-dom'
 import SideBar from '../components/SideBar';
 import swal from 'sweetalert'
-import { FaTachometerAlt, FaSignInAlt, FaUser, FaCheckSquare, FaCalculator,FaExclamation } from 'react-icons/fa'
+import { FaTachometerAlt, FaSignInAlt, FaUser, FaCheckSquare, FaCalculator, FaAccusoft,FaExclamation } from 'react-icons/fa'
 import Transitions from '../components/Transitions'
 
-const UpdateMessBill = () => {
+const BlackMark = () => {
     const navigate = useNavigate()
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [students,setStudents] = useState([]);
     const checkUserToken = () => {
         const userToken = localStorage.getItem('user-token');
         if (userToken === 'wardenwarden') {
@@ -22,33 +23,50 @@ const UpdateMessBill = () => {
     useEffect(() => {
         checkUserToken();
     }, [isLoggedIn])
+    useEffect(() => {
+        const getDetails = async () => {
+            await fetch("http://localhost:8800/warden/view-students/" + localStorage.getItem('id'), {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then((response) => {
+                    return response.json()
+                })
+                .then(data => {
+                    setStudents(data);
+                })
+                .catch(error => {
+                    window.alert(error);
+                    return;
+                })
 
+        };
+        getDetails();
+    }, [])
     const [data, setData] = useState({
-        month: "",
-        year: "",
-        amount: ""
+        name: "",
+        blackmark: "",
     })
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (data.month === '') {
-            swal("Error", "Select Month", "error");
+        if (data.name=== '') {
+            swal("Error", "Select Student Name", "error");
             return;
-        } else if (data.year === '') {
-            swal("Error", "Select Year", "error");
-            return;
-        } else if (data.amount === '') {
-            swal("Error", "Enter amount", "error");
+        } else if (data.blackmark === '') {
+            swal("Error", "Enter data", "error");
             return;
         }
-        await fetch("http://localhost:8800/warden/mess/" + localStorage.getItem('id'), {
+        console.log(data)
+        await fetch("http://localhost:8800/warden/bm/" + localStorage.getItem('id'), {
             method: 'POST',
             body: JSON.stringify({
-                month: data.month,
-                year: data.year,
-                amount: data.amount
+                name:data.name,
+                blackmark:data.blackmark
             }),
             headers: {
                 "Content-Type": "application/json"
@@ -60,10 +78,9 @@ const UpdateMessBill = () => {
             })
             .then(data => {
                 if (data.message === 'SUCCESS') {
-
-                    swal("Mess Bill Updated Successfully", "", "success")
+                    swal("Updated Successfully", "", "success")
                 } else if (data.message === 'AE') {
-                    swal("Mess Bill already updated", "", "warning")
+                    swal("Failed", "", "warning")
                 }
             })
             .catch(error => {
@@ -87,43 +104,23 @@ const UpdateMessBill = () => {
                     <div>
                         <table>
                             <th>
-                                <td className='col-span-2 text-2xl uppercase text-center text-gray-500'>Update Mess Bill</td>
+                                <td className='col-span-2 text-2xl uppercase text-center text-gray-500'>Add Blackmark</td>
                             </th>
                             <tr>
-                                <td><label className="block text-blueGray-600 text-sm font-bold mb-2">Select Month: </label></td>
-                                <td><select name='month' className='border border-gray-400 rounded-lg px-6 py-2 min-w-full' onChange={handleChange}>
+                                <td><label className="block text-blueGray-600 text-sm font-bold mb-2">Select Student: </label></td>
+                                <td><select name='name' className='border border-gray-400 rounded-lg px-6 py-2 min-w-full' onChange={handleChange}>
                                     <option selected disabled>Select </option>
-                                    <option value='1'>January</option>
-                                    <option value='2'>February</option>
-                                    <option value='3'>March</option>
-                                    <option value='4'>April</option>
-                                    <option value='5'>May</option>
-                                    <option value='6'>June</option>
-                                    <option value='7'>July</option>
-                                    <option value='8'>August</option>
-                                    <option value='9'>September</option>
-                                    <option value='10'>October</option>
-                                    <option value='11'>November</option>
-                                    <option value='12'>December</option>
+                                    {students.map((student)=>{
+                                        return <option value={student.name}>{student.name}</option>
+                                    })}
                                 </select></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label className="block  text-blueGray-600 text-sm font-bold mb-2">Year: </label>
+                                    <label className="block  text-blueGray-600 text-sm font-bold mb-2" >Enter blackmark: </label>
                                 </td>
                                 <td>
-                                    <select name='year' className='border border-gray-400 rounded-lg px-6 py-2 min-w-full' onChange={handleChange}>
-                                        <option selected disabled>Select</option>
-                                        <option value='2023'>2023</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label className="block  text-blueGray-600 text-sm font-bold mb-2">Enter Total Bill Amount: </label>
-                                </td>
-                                <td>
-                                    <input type='number' className='border border-gray-400 rounded-lg px-6 py-2 min-w-full' name='amount' onChange={handleChange}></input>
+                                    <input type='text' name='blackmark' onChange={handleChange} className='border border-gray-400 rounded-lg px-6 py-2 min-w-full'></input>
                                 </td>
                             </tr>
                             <tr>
@@ -139,4 +136,4 @@ const UpdateMessBill = () => {
     )
 }
 
-export default UpdateMessBill
+export default BlackMark

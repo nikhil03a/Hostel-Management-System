@@ -5,6 +5,8 @@ import Navbar from '../components/Navbar'
 import { Chart } from 'chart.js'
 import { FaTachometerAlt, FaKey, FaUserCircle, FaUsersCog, FaBed, FaUserShield, FaUsers, FaBuilding } from 'react-icons/fa'
 import Transitions from '../components/Transitions'
+import {MdRamenDining} from 'react-icons/md'
+import {GrUserWorker} from 'react-icons/gr'
 const AdminPage = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -64,10 +66,10 @@ const AdminPage = () => {
               </div>
             </div>
             <div class="w-full md:w-1/2 xl:w-1/3 p-6">
-              <div class="bg-gradient-to-b from-blue-200 to-blue-100 border-b-4 border-blue-500 rounded-lg shadow-xl p-5">
+              <div class="bg-gradient-to-b from-purple-200 to-purple-100 border-b-4 border-purple-500 rounded-lg shadow-xl p-5">
                 <div class="flex flex-row items-center">
                   <div class="flex-shrink pr-4">
-                    <div class="rounded-full p-5 bg-blue-600"><FaBuilding /></div>
+                    <div class="rounded-full p-5 bg-purple-600"><FaBuilding /></div>
                   </div>
                   <div class="flex-1 text-right md:text-center">
                     <h2 class="font-bold uppercase text-gray-600">No. of Hostels</h2>
@@ -85,6 +87,32 @@ const AdminPage = () => {
                   <div class="flex-1 text-right md:text-center">
                     <h2 class="font-bold uppercase text-gray-600">No. of Rooms</h2>
                     <p class="font-bold text-3xl">10+</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-full md:w-1/2 xl:w-1/3 p-6">
+              <div class="bg-gradient-to-b from-green-200 to-green-100 border-b-4 border-green-500 rounded-lg shadow-xl p-5">
+                <div class="flex flex-row items-center">
+                  <div class="flex-shrink pr-4">
+                    <div class="rounded-full p-5 bg-green-600"><MdRamenDining style={{ size: "30" }} /></div>
+                  </div>
+                  <div class="flex-1 text-right md:text-center">
+                    <h2 class="font-bold uppercase text-gray-600">No. of Mess</h2>
+                    <p class="font-bold text-3xl">2+</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-full md:w-1/2 xl:w-1/3 p-6">
+              <div class="bg-gradient-to-b from-orange-200 to-orange-100 border-b-4 border-orange-500 rounded-lg shadow-xl p-5">
+                <div class="flex flex-row items-center">
+                  <div class="flex-shrink pr-4">
+                    <div class="rounded-full p-5 bg-orange-600"><GrUserWorker style={{ size: "20" }} /></div>
+                  </div>
+                  <div class="flex-1 text-right md:text-center">
+                    <h2 class="font-bold uppercase text-gray-600">No. of Employees</h2>
+                    <p class="font-bold text-3xl">2+</p>
                   </div>
                 </div>
               </div>
