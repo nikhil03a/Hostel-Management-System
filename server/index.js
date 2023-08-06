@@ -3,6 +3,8 @@ import moment from 'moment'
 import mysql from 'mysql2'
 import bodyParser from 'body-parser'
 const app = express();
+import bcrypt from 'bcrypt'
+const salt = bcrypt.genSaltSync(10);
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -35,8 +37,8 @@ app.post('/warden/login', async (req, res) => {
         username: req.body.username,
         password: req.body.password
     };
-    db.query("select * from warden where email=? and password=?", [user.username, user.password], (err, data) => {
-        if (data.length > 0) {
+    db.query("select * from warden where email=?", [user.username], (err, data) => {
+        if (data.length > 0 && bcrypt.compareSync(user.password, data[0].password)) {
             if (data[0].approved === 1)
                 res.json({ result: 'SUCCESS', token: 'wardenwarden', id: data[0].id });
             else
@@ -51,8 +53,8 @@ app.post('/student/login', async (req, res) => {
         username: req.body.username,
         password: req.body.password
     };
-    db.query("select * from student where email=? and password=?", [user.username, user.password], (err, data) => {
-        if (data.length > 0) {
+    db.query("select * from student where email=?", [user.username], (err, data) => {
+        if (data.length > 0 && bcrypt.compareSync(user.password, data[0].password)) {
             if (data[0].approved === 1)
                 res.json({ result: 'SUCCESS', token: 'studentstudent', id: data[0].id });
             else
@@ -86,7 +88,7 @@ app.post('/student-register', async (req, res) => {
         mname: req.body.mname,
         mphone: req.body.mphone,
         moccupation: req.body.moccupation,
-        password: req.body.password,
+        password: bcrypt.hashSync(req.body.password, salt),
         hostel: req.body.gender === 'M' ? "Kurinji" : "Mullai"
     }
     db.query('select * from student where email=?', [user.email], (err, data) => {
@@ -118,7 +120,7 @@ app.post('/warden-register', async (req, res) => {
         city: req.body.city,
         address: req.body.address,
         pcode: req.body.pcode,
-        password: req.body.password,
+        password: bcrypt.hashSync(req.body.password, salt),
         hostel: req.body.gender === 'M' ? "Kurinji" : "Mullai"
     }
     db.query('select * from warden where email=?', [user.email], (err, data) => {
